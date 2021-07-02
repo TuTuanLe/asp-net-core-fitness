@@ -1,0 +1,374 @@
+﻿
+@{
+    ViewData["Title"] = "index";
+    Layout = null;
+}
+
+<ul class="site-nav" id="AccessibleNav">
+
+
+    <li class=" site-nav--active ">
+        <a href="/" class="site-nav__link">
+            <span>TRANG CHỦ</span>
+        </a>
+    </li>
+
+
+    @foreach(var category in Model)
+            {
+            <li class="">
+                <a href="/" class="site-nav__link">
+                    <span>@category.Name</span>
+                </a>
+            </li>
+            }
+    <!--<li class="mega-menu site-nav--has-dropdown " aria-haspopup="true">
+        <a href="/collections/all" class="site-nav__link">
+            <span>SẢN PHẨM</span>
+            <span class="fa fa-caret-down" aria-hidden="true"></span>
+        </a>
+        <ul class="site-nav__dropdown megamenu__dropdown megamenu_1">
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/collections/giam-can-dot-mo">Giảm Cân - Đốt Mỡ <span class="fa fa-caret-right"></span></a>
+
+                <ul>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/thuc-pham-giam-can"><i class="fa fa-angle-right"></i> Thực phẩm giảm cân</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/giam-mo-cat-net"><i class="fa fa-angle-right"></i> Giảm mỡ cắt nét</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/tra-giam-can-detox"><i class="fa fa-angle-right"></i> Trà giảm cân - Detox</a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/collections/tang-can">Tăng cân </a>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/collections/tang-co">Tăng cơ <span class="fa fa-caret-right"></span></a>
+
+                <ul>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/whey-protein"><i class="fa fa-angle-right"></i> Whey Protein</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/amino-axit"><i class="fa fa-angle-right"></i> Amino Axit</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/casein"><i class="fa fa-angle-right"></i> Casein</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/protein-bar"><i class="fa fa-angle-right"></i> Protein Bar</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/protein-danh-cho-nguoi-an-chay"><i class="fa fa-angle-right"></i> Dành Cho Người Ăn Chay</a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/collections/tang-suc-manh-suc-ben">Tăng Sức Mạnh &amp; Sức Bền <span class="fa fa-caret-right"></span></a>
+
+                <ul>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/pre-workout-dung-truoc-khi-tap"><i class="fa fa-angle-right"></i> Pre - Workout (Dùng trước khi tập)</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/creatine"><i class="fa fa-angle-right"></i> Creatine</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/bcaas"><i class="fa fa-angle-right"></i> BCAAs</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/glutamine"><i class="fa fa-angle-right"></i> Glutamine</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/multivitamin"><i class="fa fa-angle-right"></i> Multivitamin</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/dau-ca-va-omegas"><i class="fa fa-angle-right"></i> Dầu cá và Omegas</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/gel-dien-giai-phuc-hoi-co"><i class="fa fa-angle-right"></i> Gel điện giải phục hồi cơ</a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/collections/ho-tro-suc-khoe">Hỗ trợ sức khỏe <span class="fa fa-caret-right"></span></a>
+
+                <ul>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/su-dung-hang-ngay"><i class="fa fa-angle-right"></i> Sử dụng hàng ngày</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/vitamin"><i class="fa fa-angle-right"></i> Vitamin</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/xuong-khop"><i class="fa fa-angle-right"></i> Xương khớp</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/tim-mach-huyet-ap"><i class="fa fa-angle-right"></i> Tim mạch &amp; Huyết áp</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/khoang-chat"><i class="fa fa-angle-right"></i> Khoáng chất</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/tang-cuong-hoc-mon"><i class="fa fa-angle-right"></i> Tăng cường hóc môn</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/me-va-be"><i class="fa fa-angle-right"></i> Mẹ và Bé</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/ho-tro-mat-thi-luc"><i class="fa fa-angle-right"></i> Hỗ trợ mắt &amp; Thị lực</a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/collections/phu-kien-the-thao">Phụ kiện thể thao <span class="fa fa-caret-right"></span></a>
+
+                <ul>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/dong-ho-thong-minh"><i class="fa fa-angle-right"></i> Đồng hồ thông minh</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/thiet-bi-thong-minh"><i class="fa fa-angle-right"></i> Thiết bị thông minh</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/thanh-xa-tay-cam"><i class="fa fa-angle-right"></i> Thanh xà &amp; Tay cầm</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/that-lung-day-dai"><i class="fa fa-angle-right"></i> Thắt lưng &amp; Dây đai</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/tham-tap-yoga"><i class="fa fa-angle-right"></i> Thảm tập Yoga</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/bao-tay-quan-tay"><i class="fa fa-angle-right"></i> Bao tay &amp; Quấn tay</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/binh-lac-shaker"><i class="fa fa-angle-right"></i> Bình lắc shaker</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/balo-vest-nuoc"><i class="fa fa-angle-right"></i> Balo - Vest nước</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/binh-nuoc-the-thao"><i class="fa fa-angle-right"></i> Bình nước thể thao</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/day-khang-luc-dan-hoi"><i class="fa fa-angle-right"></i> Dây kháng lực đàn hồi</a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/collections/gel-dien-giai-phuc-hoi-co">Gel Điện Giải Phục Hồi Cơ </a>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/collections/combo">Combo Sản phẩm <span class="fa fa-caret-right"></span></a>
+
+                <ul>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/combo-tang-co"><i class="fa fa-angle-right"></i> Combo Tăng Cơ</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/combo-tang-can"><i class="fa fa-angle-right"></i> Combo Tăng Cân</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/combo-giam-can"><i class="fa fa-angle-right"></i> Combo Giảm Cân</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/combo-bo-sung-nang-luong"><i class="fa fa-angle-right"></i> Combo Bổ sung năng lượng</a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/collections/mon-the-thao">Môn thể thao <span class="fa fa-caret-right"></span></a>
+
+                <ul>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/gym-fitness"><i class="fa fa-angle-right"></i> Gym &amp; Fitness</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/chay-bo"><i class="fa fa-angle-right"></i> Chạy bộ</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/dap-xe"><i class="fa fa-angle-right"></i> Đạp xe</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/boi-loi"><i class="fa fa-angle-right"></i> Bơi lội</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/triathlon"><i class="fa fa-angle-right"></i> Triathlon</a>
+                    </li>
+
+                    <li class="list-unstyled nav-sub-mega">
+                        <a href="/collections/yoga"><i class="fa fa-angle-right"></i> Yoga</a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/pages/thuong-hieu">Thương hiệu </a>
+
+            </li>
+
+        </ul>
+    </li>
+
+
+
+    <li class="">
+        <a href="/collections/tat-ca-san-pham" class="site-nav__link">
+            <span>BEST SELLER</span>
+        </a>
+    </li>
+
+
+
+    <li class="">
+        <a href="/pages/thuong-hieu" class="site-nav__link">
+            <span>THƯƠNG HIỆU</span>
+        </a>
+    </li>
+
+
+
+    <li class="mega-menu site-nav--has-dropdown " aria-haspopup="true">
+        <a href="/blogs/kien-thuc-the-thao" class="site-nav__link">
+            <span>KIẾN THỨC THỂ THAO</span>
+            <span class="fa fa-caret-down" aria-hidden="true"></span>
+        </a>
+        <ul class="site-nav__dropdown megamenu__dropdown megamenu_1">
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/blogs/kien-thuc-the-hinh">Kiến thức thể hình </a>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/blogs/chay-bo">Chạy bộ </a>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/blogs/dap-xe">Đạp xe </a>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/blogs/yoga">Yoga </a>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/blogs/boi-loi">Bơi lội </a>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/blogs/reviews">Reviews sản phẩm </a>
+
+            </li>
+
+            <li class="nav-sampletext grid__item ">-->
+                <!-- large--one-sixth -->
+                <!--<a href="/blogs/videos">Videos </a>
+
+            </li>
+
+        </ul>
+    </li>
+
+
+
+    <li class="">
+        <a href="/blogs/tin-tuc" class="site-nav__link">
+            <span>TIN TỨC</span>
+        </a>
+    </li>-->
+
+
+</ul>
