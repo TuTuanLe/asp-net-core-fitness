@@ -1,18 +1,17 @@
-﻿<head>
+﻿@using System.Security.Claims;
 
+@{ 
+    var user = User.FindFirst(ClaimTypes.Name);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <link href="https://file.hstatic.net/1000185761/file/ezgif-4-cd9107c7bfce_ca19e1182f9a4c3c8b28364c152621cb.png" rel="shortcut icon" type="image/png">
     <meta name="theme-color" content="#fbae40">
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
     <title>iFitness - Phân Phối Sản Phẩm Thể Thao Và Dinh Dưỡng Chính Hãng</title>
-    
-  
-
-   
-   
-
-
     <link href="//theme.hstatic.net/1000185761/1000461179/14/libs.css?v=1826" rel="stylesheet" type="text/css" media="all">
     <script src="//hstatic.net/0/0/global/design/js/jquery.min.1.11.0.js"></script>
     <script src="//theme.hstatic.net/1000185761/1000461179/14/libs.js?v=1826"></script>
@@ -329,7 +328,7 @@
             </li>
 
             <li class="mobile-nav__item phone-mobile">
-                <div>Hotline: <strong>(028) 399.75.999</strong></div>
+                <div>Hotline: <strong>(039) 669.4769</strong></div>
             </li>
 
         </ul>
@@ -351,7 +350,7 @@
 
 
         <div class="container-mp is-moved-by-drawer is-transitioning nav-wrapper">
-       
+
             <header class="">
                 <!-- <div class="if-banner-top"><a target="_blank" href="https://ifitness.vn/collections/ao-thun-the-thao-irace-vn"><img src="https://file.hstatic.net/1000185761/file/mungdaile15_1fd970bbcb634f27ab1f3ab6d7ee85be.jpg"/></a></div>  -->
                 <div class="container">
@@ -755,7 +754,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-5 header-search hidden-xs">
 
-                                @*tìm kiếm*@ 
+                                @*tìm kiếm*@
                                 <div class="site-header__search search-desktop">
                                     <form action="/search" class="input-group search-bar ultimate-search">
                                         <div class="collections-selector">
@@ -764,7 +763,7 @@
                                             </div>
                                             <div id="kd-info" class="kd_list_search">
                                                 @Component.InvokeAsync("Search")
-                                                
+
                                             </div>
                                         </div>
                                         <input type="hidden" name="type" value="product">
@@ -780,22 +779,22 @@
                                     </form>
                                 </div>
 
-                               
-                                
+
+
 
 
                             </div>
-                            @*liên hệ*@ 
+                            @*liên hệ*@
                             <div class="col-xs-12 col-sm-2 col-md-2 hotline-header hidden-xs hidden-sm hidden-md nopadding">
 
                                 <a href="tel:02839975999">
                                     <p class="title">Giờ mở cửa (08:00 - 17:30 chiều)</p>
                                 </a><p class="number_phone hvr-buzz-out"><a href="tel:02839975999"><i class="fa fa-phone "></i></a><a href="tel:02839977777">(028) 399.77777</a></p>
 
-                                <div class="hotline-content"><div class="icon-up"></div><p><a href="tel:02839975999">(028) 399.75.999</a></p><!--	<p><span>Thời gian hoạt động</span><span class="color3">8h00 - 20h00</span></p> --></div>
+                                <div class="hotline-content"><div class="icon-up"></div><p><a href="tel:02839975999">(039) 669.4769</a></p><!--	<p><span>Thời gian hoạt động</span><span class="color3">8h00 - 20h00</span></p> --></div>
 
                             </div>
-                           
+
 
                             @*giỏ hàng*@
                             <div class="col-xs-12 col-sm-3 col-md-2 login-header right nopadding">
@@ -825,20 +824,34 @@
                                             <i class="glyphicon glyphicon-user"></i>
                                         </a>
                                         <ul class="link-list header_login_content unstyled">
-                                            <li class="header-account">
+                                            @if (@user == null)
+                                            {
+                                                <li class="header-account">
 
-                                                <a href="/account/login" id="login_link">
-                                                    <span class="name">Đăng nhập</span>
-                                                </a>|
-                                                <a href="/account/register" id="register_link">
-                                                    <span class="name">Đăng ký</span>
-                                                </a>
+                                                    <a asp-action="login" asp-controller="customer" id="login_link">
+                                                        <span class="name">Đăng nhập</span>
+                                                    </a>|
+                                                    <a asp-action="register" asp-controller="customer" id="register_link">
+                                                        <span class="name">Đăng ký</span>
+                                                    </a>
+                                                </li>
+                                            }
+                                            else
+                                            {
 
+                                                <li class="header-account">
+                                                    Xin chào:
+                                                    <a asp-action="profile" asp-controller="customer" id="login_link">
 
-                                            </li>
-
+                                                        <span class="name" style="font-size: 14px"> @user.Value</span>
+                                                    </a>|
+                                                    <a asp-action="logout" asp-controller="customer" id="register_link">
+                                                        <span class="name">Đăng Xuất</span>
+                                                    </a>
+                                                </li>
+                                            }
                                         </ul>
-                                    </div>
+                                        </div>
                                 </div>
 
                             </div>
@@ -852,10 +865,9 @@
                                 <div class="wrapper">
                                     <div class="medium-down--hide">
                                         <!-- begin site-nav -->
-
                                         @*danh mục sản phẩm*@
                                         @await Component.InvokeAsync("Category")
-                                        
+
                                     </div>
                                 </div>
                             </nav>
@@ -899,13 +911,13 @@
                 </div>
                 <div class="clearfix"></div>
 
-                @*liên hệ trên mobile*@ 
+                @*liên hệ trên mobile*@
                 <div class="header-consulting">
                     <a href="tel:02839975999">
                         <i class="fa fa-phone-square" aria-hidden="true"></i> <span>Mua nhanh: <strong> (028) 399 75 999 - (028) 399 77 777</strong></span>
                     </a>
                 </div>
-                
+
                 @*tìm kiếm trên mobile*@
                 <div class="search-mobile">
                     <form action="/search" class="input-group search-bar ultimate-search">
@@ -923,108 +935,110 @@
             <div class="clearfix"></div>
 
 
-            
 
-         
+
+
 
             <div class="main-content-wrapper">
                 <!-- banner slide -->
-                <div class="home-index-hero">
-                    <div class="home-hero-container container">
-                        <div class="nk-menu hidden-xs clearfix">
+                @if (ViewBag.isHome != null)
+                {
+                    <div class="home-index-hero">
+                        <div class="home-hero-container container">
+                            <div class="nk-menu hidden-xs clearfix">
 
-                            <div id="nk-danh-muc-san-pham-right ">
-                                <div id="nk-khuyen-mai-hot">
-                                    <div class="menu-ngang-sub hidden-xs" style="display: block;">
-                                        <ul id="text_links" class="clear">
-                                            <li class="nk-menu-ball">
-                                                <a class="" href="//ifitness.vn/collections/san-pham-khuyen-mai/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Stick-Promo&amp;utm_content=Stick-KhuyenMai" style="">KHUYẾN MÃI HOT</a>
-                                            </li>
-                                            <li class="nk-menu-hot">
-                                                <a class="" href="https://ifitness.vn/blogs/tin-tuc">Sản phẩm giá tốt</a>
-                                            </li>
-                                            <li class="nk-menu-gop">
-                                                <a style="color:#0D5BB3;" href="https://ifitness.vn/pages/chinh-sach-tra-gop"><strong><i class="fa fa-credit-card" aria-hidden="true"></i> Thanh toán trả góp lãi suất 0%</strong></a>
-                                            </li>
-                                        </ul>
+                                <div id="nk-danh-muc-san-pham-right ">
+                                    <div id="nk-khuyen-mai-hot">
+                                        <div class="menu-ngang-sub hidden-xs" style="display: block;">
+                                            <ul id="text_links" class="clear">
+                                                <li class="nk-menu-ball">
+                                                    <a class="" href="//ifitness.vn/collections/san-pham-khuyen-mai/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Stick-Promo&amp;utm_content=Stick-KhuyenMai" style="">KHUYẾN MÃI HOT</a>
+                                                </li>
+                                                <li class="nk-menu-hot">
+                                                    <a class="" href="https://ifitness.vn/blogs/tin-tuc">Sản phẩm giá tốt</a>
+                                                </li>
+                                                <li class="nk-menu-gop">
+                                                    <a style="color:#0D5BB3;" href="https://ifitness.vn/pages/chinh-sach-tra-gop"><strong><i class="fa fa-credit-card" aria-hidden="true"></i> Thanh toán trả góp lãi suất 0%</strong></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="" id="nk-goc-tai-tro-vdv" style="display: block;">
+                                        <a href="//ifitness.vn/pages/thanh-vien-vip" style="color: #fff;">
+                                            <div class="dot">
+                                                <div class="ping"></div>
+                                            </div><span class="ttl">THÀNH VIÊN VIP</span>
+                                        </a>
+                                    </div>
+                                    <div class="hidden" id="nk-header-tra-gop-0" style="display: block;">
+                                        <a href="">Tuyển dụng</a>
                                     </div>
                                 </div>
-                                <div class="" id="nk-goc-tai-tro-vdv" style="display: block;">
-                                    <a href="//ifitness.vn/pages/thanh-vien-vip" style="color: #fff;">
-                                        <div class="dot">
-                                            <div class="ping"></div>
-                                        </div><span class="ttl">THÀNH VIÊN VIP</span>
-                                    </a>
-                                </div>
-                                <div class="hidden" id="nk-header-tra-gop-0" style="display: block;">
-                                    <a href="">Tuyển dụng</a>
+                            </div>
+                            <div class="nk-menu-mobile visible-xs">
+                                <ul class="nav_main_promo">
+                                    <li class="kmhot"> <a href="//ifitness.vn/collections/san-pham-khuyen-mai/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Stick-Promo&amp;utm_content=Stick-KhuyenMai" class="box_nav" title="tin khuyến mãi"> <strong>Khuyến mãi HOT</strong> </a> </li>
+                                    <li class="right vip"> <a style="color:#fff;" href="//ifitness.vn/pages/thanh-vien-vip" title="Thành viên VIP"><div class="dot"><div class="ping"></div></div><strong>Thành viên VIP</strong></a> </li>
+                                </ul>
+                                <div style="text-align: center;font-weight: 700; background: #ffff00;padding: 5px 0;">
+                                    <a style="color: #111;" href="https://ifitness.vn/pages/chinh-sach-tra-gop"><i class="fa fa-credit-card" aria-hidden="true"></i> Thanh toán trả góp lãi suất 0% </a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="nk-menu-mobile visible-xs">
-                            <ul class="nav_main_promo">
-                                <li class="kmhot"> <a href="//ifitness.vn/collections/san-pham-khuyen-mai/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Stick-Promo&amp;utm_content=Stick-KhuyenMai" class="box_nav" title="tin khuyến mãi"> <strong>Khuyến mãi HOT</strong> </a> </li>
-                                <li class="right vip"> <a style="color:#fff;" href="//ifitness.vn/pages/thanh-vien-vip" title="Thành viên VIP"><div class="dot"><div class="ping"></div></div><strong>Thành viên VIP</strong></a> </li>
-                            </ul>
-                            <div style="text-align: center;font-weight: 700; background: #ffff00;padding: 5px 0;">
-                                <a style="color: #111;" href="https://ifitness.vn/pages/chinh-sach-tra-gop"><i class="fa fa-credit-card" aria-hidden="true"></i> Thanh toán trả góp lãi suất 0% </a>
-                            </div>
-                        </div>
-                        @*slider*@
-                        <div class="home-hero">
-                            <div class="home-hero-slider">
-                                <!-- Begin slider -->
-                                <div class="slider-default col-md-12 col-sm-12 col-xs-12">
-                                    <div class="row">
+                            @*slider*@
+                            <div class="home-hero">
+                                <div class="home-hero-slider">
+                                    <!-- Begin slider -->
+                                    <div class="slider-default col-md-12 col-sm-12 col-xs-12">
+                                        <div class="row">
 
-                                        <div class="flexslider-container">
-                                            <div class="flexslider">
-                                                @await Component.InvokeAsync("SlideShow")
+                                            <div class="flexslider-container">
+                                                <div class="flexslider">
+                                                    @await Component.InvokeAsync("SlideShow")
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- End slider -->
+
                                 </div>
-                                <!-- End slider -->
 
                             </div>
-
                         </div>
                     </div>
-                </div>
-                <div class="container">
+                    <div class="container">
 
 
-                    <div class="row box-span12">
-                        <div class="col-lg-3 col-sm-12 col-md-3 icon_before_group_3 col-lg-span3">
-                            <div class="home-hero-sub">
-                                <div class="span4">
-                                    <ul class="home-channel-list clearfix">
-                                        <li class="top left"><a href="https://ifitness.vn/collections/tang-can/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=TangCan"><img alt="icon 1" src="//theme.hstatic.net/1000185761/1000461179/14/icon-1.png?v=1826">Tăng Cân</a></li>
-                                        <li class="top"><a href="https://ifitness.vn/collections/giam-can-dot-mo/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=GiamCan"><img class=" lazyloaded" alt="icon 2" src="//theme.hstatic.net/1000185761/1000461179/14/icon-2.png?v=1826">Giảm Cân</a></li>
-                                        <li class="top"><a href="https://ifitness.vn/collections/tang-co/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=TangCo"><img class=" lazyloaded" alt="icon 3" src="//theme.hstatic.net/1000185761/1000461179/14/icon-3.png?v=1826">Tăng Cơ</a></li>
-                                        <li class="left"><a href="https://ifitness.vn/collections/tang-suc-manh-suc-ben/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=SucBen"><img class=" lazyloaded" alt="icon 4" data-src="//theme.hstatic.net/1000185761/1000461179/14/icon-4.png?v=1826" src="//theme.hstatic.net/1000185761/1000461179/14/icon-4.png?v=1826">Sức Bền</a></li>
-                                        <li><a href="https://ifitness.vn/collections/giam-mo-cat-net/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=DotMo"><img alt="icon 5" class=" lazyloaded" data-src="//theme.hstatic.net/1000185761/1000461179/14/icon-5.png?v=1826" src="//theme.hstatic.net/1000185761/1000461179/14/icon-5.png?v=1826">Đốt mỡ</a></li>
-                                        <li><a href="https://ifitness.vn/collections/ho-tro-suc-khoe/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=HoTroSucKhoe"><img alt="icon 6" class=" lazyloaded" data-src="//theme.hstatic.net/1000185761/1000461179/14/icon-6.png?v=1826" src="//theme.hstatic.net/1000185761/1000461179/14/icon-6.png?v=1826">Vitamin</a></li>
-                                    </ul>
+                        <div class="row box-span12">
+                            <div class="col-lg-3 col-sm-12 col-md-3 icon_before_group_3 col-lg-span3">
+                                <div class="home-hero-sub">
+                                    <div class="span4">
+                                        <ul class="home-channel-list clearfix">
+                                            <li class="top left"><a href="https://ifitness.vn/collections/tang-can/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=TangCan"><img alt="icon 1" src="//theme.hstatic.net/1000185761/1000461179/14/icon-1.png?v=1826">Tăng Cân</a></li>
+                                            <li class="top"><a href="https://ifitness.vn/collections/giam-can-dot-mo/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=GiamCan"><img class=" lazyloaded" alt="icon 2" src="//theme.hstatic.net/1000185761/1000461179/14/icon-2.png?v=1826">Giảm Cân</a></li>
+                                            <li class="top"><a href="https://ifitness.vn/collections/tang-co/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=TangCo"><img class=" lazyloaded" alt="icon 3" src="//theme.hstatic.net/1000185761/1000461179/14/icon-3.png?v=1826">Tăng Cơ</a></li>
+                                            <li class="left"><a href="https://ifitness.vn/collections/tang-suc-manh-suc-ben/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=SucBen"><img class=" lazyloaded" alt="icon 4" data-src="//theme.hstatic.net/1000185761/1000461179/14/icon-4.png?v=1826" src="//theme.hstatic.net/1000185761/1000461179/14/icon-4.png?v=1826">Sức Bền</a></li>
+                                            <li><a href="https://ifitness.vn/collections/giam-mo-cat-net/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=DotMo"><img alt="icon 5" class=" lazyloaded" data-src="//theme.hstatic.net/1000185761/1000461179/14/icon-5.png?v=1826" src="//theme.hstatic.net/1000185761/1000461179/14/icon-5.png?v=1826">Đốt mỡ</a></li>
+                                            <li><a href="https://ifitness.vn/collections/ho-tro-suc-khoe/?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Icon-Colletions&amp;utm_content=HoTroSucKhoe"><img alt="icon 6" class=" lazyloaded" data-src="//theme.hstatic.net/1000185761/1000461179/14/icon-6.png?v=1826" src="//theme.hstatic.net/1000185761/1000461179/14/icon-6.png?v=1826">Vitamin</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-9  col-sm-12 col-lg-span9 banner_group_3 col-md-9 hidden-sm">
-                            <ul class="home-promo-list clearfix">
-                                <li class="first">
-                                    <a class="item" href="https://ifitness.vn/blogs/kien-thuc-the-hinh/cach-chon-whey-protein?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-3Banner&amp;utm_content=HuongDanChonWhey"><img class=" lazyloaded" alt="ifitness khuyen mai" src="//theme.hstatic.net/1000185761/1000461179/14/img_banner_1.jpg?v=1826"></a>
-                                </li>
-                                <li>
-                                    <a class="item" href="https://ifitness.vn/blogs/kien-thuc-the-hinh/sua-mass-tang-can?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-3Banner&amp;utm_content=TopSuaTangCan"><img class=" lazyloaded" alt="ifitness bestseller" src="//theme.hstatic.net/1000185761/1000461179/14/img_banner_2.jpg?v=1826"></a>
-                                </li>
-                                <li class="last">
-                                    <a class="item lazyloaded" href="https://ifitness.vn/blogs/kien-thuc-the-hinh/thuc-pham-bo-sung-dot-mo?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-3Banner&amp;utm_content=TopSanPhamDotMo"><img class=" lazyloaded" alt="ifitness new product" src="//theme.hstatic.net/1000185761/1000461179/14/img_banner_3.jpg?v=1826"></a>
-                                </li>
-                            </ul>
+                            <div class="col-lg-9  col-sm-12 col-lg-span9 banner_group_3 col-md-9 hidden-sm">
+                                <ul class="home-promo-list clearfix">
+                                    <li class="first">
+                                        <a class="item" href="https://ifitness.vn/blogs/kien-thuc-the-hinh/cach-chon-whey-protein?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-3Banner&amp;utm_content=HuongDanChonWhey"><img class=" lazyloaded" alt="ifitness khuyen mai" src="//theme.hstatic.net/1000185761/1000461179/14/img_banner_1.jpg?v=1826"></a>
+                                    </li>
+                                    <li>
+                                        <a class="item" href="https://ifitness.vn/blogs/kien-thuc-the-hinh/sua-mass-tang-can?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-3Banner&amp;utm_content=TopSuaTangCan"><img class=" lazyloaded" alt="ifitness bestseller" src="//theme.hstatic.net/1000185761/1000461179/14/img_banner_2.jpg?v=1826"></a>
+                                    </li>
+                                    <li class="last">
+                                        <a class="item lazyloaded" href="https://ifitness.vn/blogs/kien-thuc-the-hinh/thuc-pham-bo-sung-dot-mo?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-3Banner&amp;utm_content=TopSanPhamDotMo"><img class=" lazyloaded" alt="ifitness new product" src="//theme.hstatic.net/1000185761/1000461179/14/img_banner_3.jpg?v=1826"></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
+                }
                 <div class="page-main home-main">
                     <div class="container">
                         @RenderBody()
@@ -1142,8 +1156,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1030584298" data-handle="/products/sua-tang-can-extreme-massive-mass-gainer-2-72kg"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1188,8 +1202,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1030611556" data-handle="/products/sua-tang-can-tang-co-blade-muscle-maxx-7000g"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1234,8 +1248,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1005618525" data-handle="/products/sua-tang-can-elite-labs-usa-mass-muscle-gainer-4-62kg"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1284,8 +1298,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1013136782" data-handle="/products/sua-tang-can-tang-co-muscletech-mass-tech-extreme-2000-10kg"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1335,8 +1349,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1005035596" data-handle="/products/sua-tang-can-mass-tech-performance-series-3-18kg"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1386,8 +1400,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1013136782" data-handle="/products/sua-tang-can-tang-co-muscletech-mass-tech-extreme-2000-10kg"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1437,8 +1451,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1005035596" data-handle="/products/sua-tang-can-mass-tech-performance-series-3-18kg"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1576,8 +1590,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1031714783" data-handle="/products/dau-mct-oil-bo-sung-nang-luong-giam-can-tot-tieu-hoa"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1647,8 +1661,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1028028380" data-handle="/products/vien-uong-dot-mo-tu-nhien-an-toan-nutrex-lipo-6-cla-45-vien"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1717,8 +1731,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1028026329" data-handle="/products/vien-uong-dot-mo-danh-cho-nu-nutrex-lipo-6-black-her-120-vien"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1787,8 +1801,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1028024949" data-handle="/products/vien-uong-dot-mo-khong-chat-kich-thich-nutrex-lipo-6-black-stim-free-60-vien"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1860,8 +1874,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1015881046" data-handle="/products/vien-uong-dot-mo-nutrex-lipo-6-black-ultra-concentrate"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -1936,8 +1950,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1006490913" data-handle="/products/vien-uong-tang-co-giam-mo-muscletech-hydroxycut-hardcore-elite"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -2022,8 +2036,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1005035623" data-handle="/products/vien-uong-giam-mo-cat-net-ultra-ripped-capsules-ephedra-free-90-vien"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -2095,8 +2109,8 @@
                                                                                 </a>
                                                                             </div>
                                                                             <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
-                                                            <span>Mua ngay</span>
-                                                        </button> -->
+                                                                                <span>Mua ngay</span>
+                                                                            </button> -->
                                                                             <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1017160564" data-handle="/products/sua-uong-truoc-khi-tap-elite-labs-usa-pre-cut-white-raspberry"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                                         </div>
                                                                     </div>
@@ -2215,7 +2229,7 @@
                             </div>
                         </div>
 
-                     
+
                     </div>
                 </div>
                 <div class="site-info">
@@ -2246,21 +2260,24 @@
 
 
                 <style>
-	.block_content.toggle-footer {
-	display: none;
-	}
-	.icon-footer {
-	width: 40px;
-	height: 40px;
-	text-align: center;
-	}
-	.footer-block {
-	clear: both;
-	}
-	.block_content.toggle-footer.show{
-	display:block !important;
-	}
-	}
+                    .block_content.toggle-footer {
+                        display: none;
+                    }
+
+                    .icon-footer {
+                        width: 40px;
+                        height: 40px;
+                        text-align: center;
+                    }
+
+                    .footer-block {
+                        clear: both;
+                    }
+
+                    .block_content.toggle-footer.show {
+                        display: block !important;
+                    }
+                    }
                 </style>
                 <script>
                     $('.icon-footer').click(function () {
@@ -2410,41 +2427,6 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
     <!-- /.modal -->
-    <div id="quick-view-modal" class="modal fade hidden-xs" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="quickview_content wrapper-quickview">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        $(document).on("click", '.quick-view', function (e) {
-            var url = $(this).attr('data-handle');
-            var id = $(this).attr('data-id');
-            var title = $(this).parents('.product-block').find(".pro-name a").attr('title');
-            if ($(window).width() <= 767) window.location = url;
-            else {
-                var option_view = 'quickview';
-                e.preventDefault();
-                $.ajax({
-                    url: url + '?view=' + option_view,
-                    async: false,//tắt bất đồng bộ
-                    success: function (data) {
-                        $('#quick-view-modal').find('.quickview_content').html(data);
-                    }
-                });
-                $('#quick-view-modal').modal('show');
-                setTimeout(function () {
-                    getPromotionRecommended_qv();
-                    comboApp.init(id, title);
-                }, 500);
-            }
-        });
-
-    </script>
 
 
 
@@ -2627,12 +2609,12 @@
             event.preventDefault();
         });
     </script>
-   
-  
 
-  
-   
- <script>
+
+
+
+
+    <script>
 
         var someone_setting = [
 
@@ -2711,7 +2693,7 @@
                 $(".location").text('' + currentmyLocation);
             }
 
-          
+
             (function loop() {
                 var rand = Math.round(Math.random() * 3000) + 10000;
                 setTimeout(function () {
@@ -2746,3 +2728,4 @@
 
 
 </body>
+</html>

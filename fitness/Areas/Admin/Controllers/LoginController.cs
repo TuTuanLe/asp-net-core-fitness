@@ -64,7 +64,7 @@ namespace fitness.Areas.Admin.Controllers
         [Route("signout")]
         public IActionResult signout()
         {
-            securityManager.SignOut(this.HttpContext);
+            securityManager.SignOut(this.HttpContext, "Admin_Schema");
             return RedirectToAction("index","login", new { area = "admin" });
         }
         

@@ -1,155 +1,692 @@
 ﻿
-
 @{
     ViewData["Title"] = "Index";
-    Layout = null;
+    Layout = "~/Views/Shared/_User_layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html lang="en">
-<!--begin::Head-->
-<head>
-    <base href="../../../../">
-    <meta charset="utf-8" />
-    <title>Sign In | Keenthemes</title>
-    <meta name="description" content="Singin page example" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="canonical" href="https://keenthemes.com/metronic" />
-    <!--begin::Fonts-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-    <!--end::Fonts-->
-    <!--begin::Page Custom Styles(used by this page)-->
-    <link href="~/admin/assets/css/pages/login/login-3.css" rel="stylesheet" type="text/css" />
-    <!--end::Page Custom Styles-->
-    <!--begin::Global Theme Styles(used by all pages)-->
-    <link href="~/admin/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="~/admin/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="~/admin/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-    <!--end::Global Theme Styles-->
-    <!--begin::Layout Themes(used by all pages)-->
-    <link href="~/admin/assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
-    <link href="~/admin/assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
-    <link href="~/admin/assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
-    <link href="~/admin/assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
-    <!--end::Layout Themes-->
-    <link rel="shortcut icon" href="~/admin/assets/media/logos/favicon.ico" />
-</head>
-<!--end::Head-->
-<!--begin::Body-->
-<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-    <!--begin::Main-->
-    <div class="d-flex flex-column flex-root">
-        <!--begin::Login-->
-        <div class="login login-3 wizard d-flex flex-column flex-lg-row flex-column-fluid">
-            <!--begin::Aside-->
-            <div class="login-aside d-flex flex-column flex-row-auto">
-                <!--begin::Aside Top-->
-                <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
-                    <!--begin::Aside header-->
-                    <a href="#" class="login-logo text-center pt-lg-25 pb-10">
-                        <img src="~/admin/assets/media/logos/logo-1.png" class="max-h-70px" alt="" />
-                    </a>
-                    <!--end::Aside header-->
-                    <!--begin::Aside Title-->
-                    <h3 class="font-weight-bolder text-center font-size-h4 text-dark-50 line-height-xl">
-                        User Experience &amp; Interface Design
-                        <br />Strategy SaaS Solutions
-                    </h3>
-                    <!--end::Aside Title-->
-                </div>
-                <!--end::Aside Top-->
-                <!--begin::Aside Bottom-->
-                <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-x-center" style="background-position-y: calc(100% + 5rem); background-image: url(assets/media/svg/illustrations/login-visual-5.svg)"></div>
-                <!--end::Aside Bottom-->
+<div class="home-brick-box">
+
+    <div class="product_tabs_slider">
+        <div class="box-hd-title clear">
+            <a href="/collections/tang-can/">
+                <h2 class="title">Tăng Cân test</h2>
+            </a>
+            <div class="visible-xs toggle-list">
+                Nhiều hơn <i class="fa fa-angle-down"></i>
             </div>
-            <!--begin::Aside-->
-            <!--begin::Content-->
-            <div class="login-content flex-row-fluid d-flex flex-column p-10">
-                <!--begin::Top-->
-                <div class="text-right d-flex justify-content-center">
-                    <div class="top-signin text-right d-flex justify-content-end pt-5 pb-lg-0 pb-10">
-                        <span class="font-weight-bold text-muted font-size-h4">Having issues?</span>
-                        <a href="javascript:;" class="font-weight-bold text-primary font-size-h4 ml-2" id="kt_login_signup">Get Help</a>
-                    </div>
-                </div>
-                <!--end::Top-->
-                <!--begin::Wrapper-->
-                <div class="d-flex flex-row-fluid flex-center">
-                    <!--begin::Signin-->
-                    <div class="login-form">
-                        <!--begin::Form-->
-                        <form asp-controller="home" class="form" asp-action="index1" method="post">
-                            @*begin::Title*@
-                            <div class="pb-5 pb-lg-15">
-                                <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h3>
-                                <div class="text-muted font-weight-bold font-size-h4">
-                                    New Here?
-                                    <a href="custom/pages/login/login-3/signup.html" class="text-primary font-weight-bolder">Create Account</a>
-                                </div>
-                            </div>
-                            @*begin::Title
-                                begin::Form group*@
-                            <div class="form-group">
-                                <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
-                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="username" autocomplete="off" />
-                            </div>
-                            @*end::Form group
-                                begin::Form group*@
-                            <div class="form-group">
-                                <div class="d-flex justify-content-between mt-n5">
-                                    <label class="font-size-h6 font-weight-bolder text-dark pt-5">Your Name</label>
-                                    <a href="custom/pages/login/login-3/forgot.html" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">Forgot Password ?</a>
-                                </div>
-                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" name="password" autocomplete="off" />
-                            </div>
-                            @*end::Form group
-                                begin::Action*@
-                            <div class="pb-lg-0 pb-5">
-                                <button type="submit" id="kt_login_singin_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
-                                <button type="button" class="btn btn-light-primary font-weight-bolder px-8 py-4 my-3 font-size-lg">
-                                    <span class="svg-icon svg-icon-md">
-                                        @*begin::Svg Icon | path:assets/media/svg/social-icons/google.svg*@
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M19.9895 10.1871C19.9895 9.36767 19.9214 8.76973 19.7742 8.14966H10.1992V11.848H15.8195C15.7062 12.7671 15.0943 14.1512 13.7346 15.0813L13.7155 15.2051L16.7429 17.4969L16.9527 17.5174C18.879 15.7789 19.9895 13.221 19.9895 10.1871Z" fill="#4285F4" />
-                                            <path d="M10.1993 19.9313C12.9527 19.9313 15.2643 19.0454 16.9527 17.5174L13.7346 15.0813C12.8734 15.6682 11.7176 16.0779 10.1993 16.0779C7.50243 16.0779 5.21352 14.3395 4.39759 11.9366L4.27799 11.9466L1.13003 14.3273L1.08887 14.4391C2.76588 17.6945 6.21061 19.9313 10.1993 19.9313Z" fill="#34A853" />
-                                            <path d="M4.39748 11.9366C4.18219 11.3166 4.05759 10.6521 4.05759 9.96565C4.05759 9.27909 4.18219 8.61473 4.38615 7.99466L4.38045 7.8626L1.19304 5.44366L1.08875 5.49214C0.397576 6.84305 0.000976562 8.36008 0.000976562 9.96565C0.000976562 11.5712 0.397576 13.0882 1.08875 14.4391L4.39748 11.9366Z" fill="#FBBC05" />
-                                            <path d="M10.1993 3.85336C12.1142 3.85336 13.406 4.66168 14.1425 5.33717L17.0207 2.59107C15.253 0.985496 12.9527 0 10.1993 0C6.2106 0 2.76588 2.23672 1.08887 5.49214L4.38626 7.99466C5.21352 5.59183 7.50242 3.85336 10.1993 3.85336Z" fill="#EB4335" />
-                                        </svg>
-                                        @*end::Svg Icon*@
-                                    </span>Sign in with Google
-                                </button>
-                            </div>
-                            @*end::Action*@
-                        </form>
-                        <!--end::Form-->
-                    </div>
-                    <!--end::Signin-->
-                </div>
-                <!--end::Wrapper-->
-            </div>
-            <!--end::Content-->
+
+            <ul class="tabs tab-list">
+                <li class="active" rel="hometab-04">
+                    <h3>Tất cả</h3>
+                </li>
+            </ul>
         </div>
-        <!--end::Login-->
+
+        <div class="row box-bd-content">
+            @*Banner cho sản phẩm*@
+            <div class="col-lg-3 col-lg-span3 col-xs-12 slider-mobile visibel-xs">
+
+
+                <div class="list-banner-1 banner-left">
+                    <a href="https://ifitness.vn/products/sua-tang-can-tang-co-blade-muscle-maxx-7000g?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Left-TangCan&amp;utm_content=BladeMass">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="//theme.hstatic.net/1000185761/1000461179/14/tab-banner-4-1-mobile.jpg?v=1826">
+                            <source media="(min-width: 769px)" srcset="//theme.hstatic.net/1000185761/1000461179/14/tab-banner-4-1.jpg?v=1826">
+                            <img class="lazyload" data-src="//theme.hstatic.net/1000185761/1000461179/14/tab-banner-4-1.jpg?v=1826" alt="Tăng Cân" src="//theme.hstatic.net/1000185761/1000461179/14/tab-banner-4-1.jpg?v=1826">
+                        </picture>
+
+                    </a>
+                </div>
+
+                <div class="list-banner-2 banner-left">
+                    <a href="https://ifitness.vn/products/sua-tang-can-tang-co-muscletech-mass-tech-extreme-2000-10kg?utm_source=iFitness&amp;utm_medium=Banner&amp;utm_campaign=Home-Left-TangCan&amp;utm_content=MassTech10kg">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="//theme.hstatic.net/1000185761/1000461179/14/tab-banner-4-2-mobile.jpg?v=1826">
+                            <source media="(min-width: 769px)" srcset="//theme.hstatic.net/1000185761/1000461179/14/tab-banner-4-2.jpg?v=1826">
+                            <img class="lazyload" data-src="//theme.hstatic.net/1000185761/1000461179/14/tab-banner-4-2.jpg?v=1826" alt="Tăng Cân" src="//theme.hstatic.net/1000185761/1000461179/14/tab-banner-4-2.jpg?v=1826">
+                        </picture>
+                    </a>
+                </div>
+
+            </div>
+            @*Danh muc sản phẩm*@
+            <div class="col-lg-9 col-lg-span9 col-xs-12 group-pd">
+                <div class="row-span">
+                    <div class="tab_container">
+                        <div class="row_edited content-product-list">
+                            <div id="hometab-04" class="tab_content" style="display: block;">
+                                <div id="hometab-04_in" class="tabSlide">
+
+                                    @foreach (var product in ViewBag.FeaturedProducts)
+                                    {
+                                        Product product_ = (Product)product;
+                                        var photo = product_.Photoss.SingleOrDefault(p => p.Featured == true);
+
+
+                                        <div class="col-lg-3 col-sm-4 col-md-4 col-xs-6 pro-loop  ">
+                                            <!--sử dụng  -->
+                                            <div class="product-block product-resize product-wrapper">
+                                                <div class="product-img image-resize view view-third product-image clearfix">
+
+                                                    <div class="product-sale">
+                                                        <span><label class="sale-lb">-</label> 19%</span>
+                                                    </div>
+
+
+                                                    <div class="product_gift_label hidden" product-id="1013136782">
+                                                        <img alt="icon qua tang" class="gift lazyload" src="//theme.hstatic.net/1000185761/1000461179/14/icon_gift.png?v=1826">
+                                                    </div>
+
+
+                                                    <a asp-controller="home" asp-action="detailProduct" asp-route-id="@product.Id" title="@product.Name">
+                                                        <img class="primary-img lazyload" src="~/product/@photo.Name">
+                                                    </a>
+                                                    <div class="functional-buttons clearfix">
+                                                        <div class="cart">
+                                                            <a class="btn-buy ajax_add_to_cart btn button asdasd " href="">
+                                                                <span>
+                                                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                                    Thêm vào giỏ
+                                                                </span>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#"  data-id="@product.Id"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="product-detail clearfix">
+
+                                                    <h3 class="pro-name clearfix"><a href="" title="@product.Name">@product.Name</a></h3>
+                                                    <!-- sử dụng pull-right -->
+                                                    <div class="content_price">
+                                                        <p class="pro-price">@(String.Format("{0:#,##0.##}", product.Price))₫</p>
+                                                        <p class="pro-price-del">
+                                                            <del class="compare-price">2,700,000₫</del>
+                                                        </p>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    }
+
+
+
+
+
+
+
+
+
+
+                                    <div class="col-lg-3 col-sm-4 col-md-4 col-xs-6 pro-loop  ">
+                                        <!--sử dụng  -->
+                                        <div class="product-block product-resize product-wrapper">
+                                            <div class="product-img image-resize view view-third product-image clearfix">
+
+                                                <div class="product-sale">
+                                                    <span><label class="sale-lb">-</label> 19%</span>
+                                                </div>
+
+
+
+
+                                                <div class="product_gift_label hidden" product-id="1013136782">
+                                                    <img alt="icon qua tang" class="gift lazyload" src="//theme.hstatic.net/1000185761/1000461179/14/icon_gift.png?v=1826">
+                                                </div>
+
+
+                                                <a href="/products/sua-tang-can-tang-co-muscletech-mass-tech-extreme-2000-10kg" title="Sữa tăng cân tăng cơ MuscleTech MassTech Extreme 2000 22lbs (10kg)">
+                                                    <img class="primary-img lazyload" data-img="//product.hstatic.net/1000185761/product/mass-tech-extreme-2000-22lbs-triple-chocolate_medium.jpg" alt="MuscleTech Mass-Tech Extreme 2000 10kg" data-src="//product.hstatic.net/1000185761/product/mass-tech-extreme-2000-22lbs-triple-chocolate_medium.jpg" src="//product.hstatic.net/1000185761/product/mass-tech-extreme-2000-22lbs-triple-chocolate_medium.jpg">
+                                                </a>
+                                                <div class="functional-buttons clearfix">
+                                                    <div class="cart">
+                                                        <a class="btn-buy ajax_add_to_cart btn button asdasd " data-variant-id="1025370885" data-product-id="1013136782" href="javascript:void(0); ga('send', 'event', 'MuaHang', 'ChoVaoGio', 'DanhMucSanPham');">
+                                                            <span>
+                                                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                                Thêm vào giỏ
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
+                                                        <span>Mua ngay</span>
+                                                    </button> -->
+                                                    <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1013136782" data-handle="/products/sua-tang-can-tang-co-muscletech-mass-tech-extreme-2000-10kg"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
+                                                </div>
+                                            </div>
+                                            <div class="product-detail clearfix">
+
+                                                <h3 class="pro-name clearfix"><a href="/products/sua-tang-can-tang-co-muscletech-mass-tech-extreme-2000-10kg" title="Sữa tăng cân tăng cơ MuscleTech MassTech Extreme 2000 22lbs (10kg)">Sữa tăng cân tăng cơ MuscleTech MassTech Extreme 2000 22lbs (10kg) </a></h3>
+                                                <!-- sử dụng pull-right -->
+                                                <div class="content_price">
+                                                    <p class="pro-price">2,200,000₫</p>
+                                                    <p class="pro-price-del">
+                                                        <del class="compare-price">2,700,000₫</del>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-4 col-md-4 col-xs-6 pro-loop  ">
+                                        <!--sử dụng  -->
+                                        <div class="product-block product-resize product-wrapper">
+                                            <div class="product-img image-resize view view-third product-image clearfix">
+
+                                                <div class="product-sale">
+                                                    <span><label class="sale-lb">-</label> 9%</span>
+                                                </div>
+
+
+
+
+                                                <div class="product_gift_label hidden" product-id="1005035596">
+                                                    <img alt="icon qua tang" class="gift lazyload" src="//theme.hstatic.net/1000185761/1000461179/14/icon_gift.png?v=1826">
+                                                </div>
+
+
+                                                <a href="/products/sua-tang-can-mass-tech-performance-series-3-18kg" title="Sữa Tăng Cân Mass-Tech Performance Series 3.18kg 3 mùi">
+                                                    <img class="primary-img lazyload" data-img="//product.hstatic.net/1000185761/product/masstech-milk-choco-7lb_medium.jpg" alt="Mass Tech Performance Series Milk Chocolate 3.18kg" data-src="//product.hstatic.net/1000185761/product/masstech-milk-choco-7lb_medium.jpg" src="//product.hstatic.net/1000185761/product/masstech-milk-choco-7lb_medium.jpg">
+                                                </a>
+                                                <div class="functional-buttons clearfix">
+                                                    <div class="cart">
+                                                        <a class="btn-buy ajax_add_to_cart btn button asdasd " data-variant-id="1013818560" data-product-id="1005035596" href="javascript:void(0); ga('send', 'event', 'MuaHang', 'ChoVaoGio', 'DanhMucSanPham');">
+                                                            <span>
+                                                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                                Thêm vào giỏ
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
+                                                        <span>Mua ngay</span>
+                                                    </button> -->
+                                                    <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1005035596" data-handle="/products/sua-tang-can-mass-tech-performance-series-3-18kg"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
+                                                </div>
+                                            </div>
+                                            <div class="product-detail clearfix">
+
+                                                <h3 class="pro-name clearfix"><a href="/products/sua-tang-can-mass-tech-performance-series-3-18kg" title="Sữa Tăng Cân Mass-Tech Performance Series 3.18kg 3 mùi">Sữa Tăng Cân Mass-Tech Performance Series 3.18kg 3 mùi </a></h3>
+                                                <!-- sử dụng pull-left -->
+                                                <div class="content_price">
+                                                    <p class="pro-price">1,320,000₫</p>
+                                                    <p class="pro-price-del">
+                                                        <del class="compare-price">1,450,000₫</del>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-4 col-md-4 col-xs-6 pro-loop  ">
+                                        <!--sử dụng  -->
+                                        <div class="product-block product-resize product-wrapper">
+                                            <div class="product-img image-resize view view-third product-image clearfix">
+
+                                                <div class="product-sale">
+                                                    <span><label class="sale-lb">-</label> 19%</span>
+                                                </div>
+
+
+
+
+                                                <div class="product_gift_label hidden" product-id="1013136782">
+                                                    <img alt="icon qua tang" class="gift lazyload" src="//theme.hstatic.net/1000185761/1000461179/14/icon_gift.png?v=1826">
+                                                </div>
+
+
+                                                <a href="/products/sua-tang-can-tang-co-muscletech-mass-tech-extreme-2000-10kg" title="Sữa tăng cân tăng cơ MuscleTech MassTech Extreme 2000 22lbs (10kg)">
+                                                    <img class="primary-img lazyload" data-img="//product.hstatic.net/1000185761/product/mass-tech-extreme-2000-22lbs-triple-chocolate_medium.jpg" alt="MuscleTech Mass-Tech Extreme 2000 10kg" data-src="//product.hstatic.net/1000185761/product/mass-tech-extreme-2000-22lbs-triple-chocolate_medium.jpg" src="//product.hstatic.net/1000185761/product/mass-tech-extreme-2000-22lbs-triple-chocolate_medium.jpg">
+                                                </a>
+                                                <div class="functional-buttons clearfix">
+                                                    <div class="cart">
+                                                        <a class="btn-buy ajax_add_to_cart btn button asdasd " data-variant-id="1025370885" data-product-id="1013136782" href="javascript:void(0); ga('send', 'event', 'MuaHang', 'ChoVaoGio', 'DanhMucSanPham');">
+                                                            <span>
+                                                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                                Thêm vào giỏ
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
+                                                        <span>Mua ngay</span>
+                                                    </button> -->
+                                                    <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1013136782" data-handle="/products/sua-tang-can-tang-co-muscletech-mass-tech-extreme-2000-10kg"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
+                                                </div>
+                                            </div>
+                                            <div class="product-detail clearfix">
+
+                                                <h3 class="pro-name clearfix"><a href="/products/sua-tang-can-tang-co-muscletech-mass-tech-extreme-2000-10kg" title="Sữa tăng cân tăng cơ MuscleTech MassTech Extreme 2000 22lbs (10kg)">Sữa tăng cân tăng cơ MuscleTech MassTech Extreme 2000 22lbs (10kg) </a></h3>
+                                                <!-- sử dụng pull-right -->
+                                                <div class="content_price">
+                                                    <p class="pro-price">2,200,000₫</p>
+                                                    <p class="pro-price-del">
+                                                        <del class="compare-price">2,700,000₫</del>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-4 col-md-4 col-xs-6 pro-loop  ">
+                                        <!--sử dụng  -->
+                                        <div class="product-block product-resize product-wrapper">
+                                            <div class="product-img image-resize view view-third product-image clearfix">
+
+                                                <div class="product-sale">
+                                                    <span><label class="sale-lb">-</label> 9%</span>
+                                                </div>
+
+
+
+
+                                                <div class="product_gift_label hidden" product-id="1005035596">
+                                                    <img alt="icon qua tang" class="gift lazyload" src="//theme.hstatic.net/1000185761/1000461179/14/icon_gift.png?v=1826">
+                                                </div>
+
+
+                                                <a href="/products/sua-tang-can-mass-tech-performance-series-3-18kg" title="Sữa Tăng Cân Mass-Tech Performance Series 3.18kg 3 mùi">
+                                                    <img class="primary-img lazyload" data-img="//product.hstatic.net/1000185761/product/masstech-milk-choco-7lb_medium.jpg" alt="Mass Tech Performance Series Milk Chocolate 3.18kg" data-src="//product.hstatic.net/1000185761/product/masstech-milk-choco-7lb_medium.jpg" src="//product.hstatic.net/1000185761/product/masstech-milk-choco-7lb_medium.jpg">
+                                                </a>
+                                                <div class="functional-buttons clearfix">
+                                                    <div class="cart">
+                                                        <a class="btn-buy ajax_add_to_cart btn button asdasd " data-variant-id="1013818560" data-product-id="1005035596" href="javascript:void(0); ga('send', 'event', 'MuaHang', 'ChoVaoGio', 'DanhMucSanPham');">
+                                                            <span>
+                                                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                                Thêm vào giỏ
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    <!--	<button id="buy-now"   class=" btn button ajax_addtocart ">
+                                                        <span>Mua ngay</span>
+                                                    </button> -->
+                                                    <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="1005035596" data-handle="/products/sua-tang-can-mass-tech-performance-series-3-18kg"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
+                                                </div>
+                                            </div>
+                                            <div class="product-detail clearfix">
+
+                                                <h3 class="pro-name clearfix"><a href="/products/sua-tang-can-mass-tech-performance-series-3-18kg" title="Sữa Tăng Cân Mass-Tech Performance Series 3.18kg 3 mùi">Sữa Tăng Cân Mass-Tech Performance Series 3.18kg 3 mùi </a></h3>
+                                                <!-- sử dụng pull-left -->
+                                                <div class="content_price">
+                                                    <p class="pro-price">1,320,000₫</p>
+                                                    <p class="pro-price-del">
+                                                        <del class="compare-price">1,450,000₫</del>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!--end::Main-->
-    <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
-    <!--begin::Global Config(global config for global JS scripts)-->
-    <script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3699FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#E4E6EF", "dark": "#181C32" }, "light": { "white": "#ffffff", "primary": "#E1F0FF", "secondary": "#EBEDF3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#3F4254", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#EBEDF3", "gray-300": "#E4E6EF", "gray-400": "#D1D3E0", "gray-500": "#B5B5C3", "gray-600": "#7E8299", "gray-700": "#5E6278", "gray-800": "#3F4254", "gray-900": "#181C32" } }, "font-family": "Poppins" };</script>
-    <!--end::Global Config-->
-    <!--begin::Global Theme Bundle(used by all pages)-->
-    <script src="~/admin/assets/plugins/global/plugins.bundle.js"></script>
-    <script src="~/admin/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-    <script src="~/admin/assets/js/scripts.bundle.js"></script>
-    <!--end::Global Theme Bundle-->
-    <!--begin::Page Scripts(used by this page)-->
-    <script src="~/admin/assets/js/pages/custom/login/login-3.js"></script>
-    <!--end::Page Scripts-->
+</div>
 
 
 
 
-</body>
-<!--end::Body-->
-</html>
 
+<div id="quick-view-modal" class="modal fade hidden-xs" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="quickview_content wrapper-quickview">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><a aria-hidden="true"></a></button>
+                <div class="modal-header">
+                    <h4 class="p-title modal-title" id="productDescript" data-href="/products/vien-uong-tang-cuong-hoc-mon-dhea-100-vien">
+                        Viên Uống Tăng Cường Hóc Môn DHEA 100 viên
+                    </h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                <div id="surround-qv">
+
+                                    <div class="product-sale-qv">
+                                        <span>
+                                            <label class="sale-lb">Sale </label>
+
+                                        </span>
+                                    </div>
+
+
+                                    <a class="slide-prev-qv slide-nav" href="javascript:">
+                                        <i class="fa fa-arrow-circle-o-left fa-2"></i>
+                                    </a>
+                                    <a class="slide-next-qv slide-nav" href="javascript:">
+                                        <i class="fa fa-arrow-circle-o-right fa-2"></i>
+                                    </a>
+                                    <img class="product-image-feature-qv" src="//product.hstatic.net/1000185761/product/ultimate-nutrition-dhea-25mg-100-capsule_master.jpg" alt="Viên Uống Tăng Cường Hóc Môn DHEA 100 viên">
+
+                                    <div id="sliderproduct-qv" class="">
+                                        <ul class="slides-qv">
+
+                                            <li class="product-thumb-qv">
+                                                <a href="javascript:" data-image="//product.hstatic.net/1000185761/product/dhea25mg100cap_0dd53a778e0e4e908b1a6f4590acfe20_master.jpg" data-zoom-image="//product.hstatic.net/1000185761/product/dhea25mg100cap_0dd53a778e0e4e908b1a6f4590acfe20_master.jpg">
+                                                    <img alt="Viên Uống Tăng Cường Hóc Môn DHEA 100 viên" data-image="//product.hstatic.net/1000185761/product/dhea25mg100cap_0dd53a778e0e4e908b1a6f4590acfe20_master.jpg" src="//product.hstatic.net/1000185761/product/dhea25mg100cap_0dd53a778e0e4e908b1a6f4590acfe20_thumb.jpg">
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+
+
+                                </div>
+                                <div id="buyxgety-program-qv" class="hidden">
+                                    <h3 id="buyxgety-title">
+                                        <div>
+                                            <i class="fa fa-gift"></i>Quà tặng - Khuyến mãi
+                                        </div>
+                                    </h3>
+                                    <div id="buyxgety-product-list" data-id="1005701396" data-title="Viên Uống Tăng Cường Hóc Môn DHEA 100 viên">
+                                        <table></table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                                <div class="product-vendor  "><b><a href="/collections/">Ultimate Nutrition</a></b></div>
+                                <div id="pro_sku_qv" class="product-sku">SKU: SMUN030</div>
+                                <div class="product-type"><i class="fa fa-tags"></i> <b>Loại : <a title="Show type" href="/collections/types?q=vien">Viên</a></b></div>
+                                <div class="goods-subtitle" itemprop="description">
+
+                                    <ul >
+                                        <li><strong>Viên uống tăng cường hocmon DHEA</strong> giúp cân bằng nội tiết và cải thiện sinh lý nữ</li>
+                                        
+                                    </ul>
+                                    <p>
+                                    </p>
+                                </div>
+                                <div class="product-price-p20 row">
+                                    <div class="product-price col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" id="price-preview-qv"><span id="productPrice" >456,000₫</span><del>480,000₫</del></div>
+
+                                    <div class="pt-sale-qv col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">Tiết kiệm : <span id="price-tk">24,000₫ (-5%)</span></div>
+                                </div>
+
+
+
+                                <form id="add-item-form" action="/cart/add" method="post" class="variants clearfix">
+                                    <div class="select-swatch-qv">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <div id="variant-swatch-0" class="swatch clearfix" data-option="option1" data-option-index="0">
+                                            <div class="header">
+
+                                                Chọn kích thước
+
+                                            </div>
+                                            <div class="select-swap">
+
+
+
+
+
+
+
+                                                <div data-value="100 Viên" class="n-sd swatch-element 100-vien ">
+                                                    <input class="variant-0" id="swatch-0-100-vien" type="radio" name="option1" data-value="100-vien" value="100 Viên" checked="">
+
+
+                                                    <label for="swatch-0-100-vien" data-variant="100-vien" class="sd">
+                                                        100 Viên
+                                                        <img class="crossed-out" src="//theme.hstatic.net/1000185761/1000461179/14/soldout.png?v=1827">
+                                                        <img class="img-check" src="//theme.hstatic.net/1000185761/1000461179/14/select-pro.png?v=1827">
+                                                    </label>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+
+                                    <div class="select clearfix">
+                                        <div class="selector-wrapper"><label>Kích thước</label><span class="select-swap"><select class="single-option-selector select-swap" data-option="option1" id="product-select-qv-option-0"><option value="100 Viên">100 Viên</option></select></span></div><select id="product-select-qv" data-productid="1005701396" name="id" style="display:none">
+
+                                            <option value="1013695219">100 Viên - 456,000₫</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="product_button">
+                                        <div class="clearfix">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 nopadding">
+                                                <div class="quantity qty-custom clearfix ">
+                                                    <label for="Quantity" class="quantity-selector left">Số lượng</label>
+                                                    <div class="quantity-box left">
+                                                        <select id="qv-quantity" name="quantity" class="qv-quantity-selector">
+
+                                                            <option value="1">1</option>
+
+                                                            <option value="2">2</option>
+
+                                                            <option value="3">3</option>
+
+                                                            <option value="4">4</option>
+
+                                                            <option value="5">5</option>
+
+                                                            <option value="6">6</option>
+
+                                                            <option value="7">7</option>
+
+                                                            <option value="8">8</option>
+
+                                                            <option value="9">9</option>
+
+                                                            <option value="10">10</option>
+
+                                                            <option value="11">11</option>
+
+                                                            <option value="12">12</option>
+
+                                                            <option value="13">13</option>
+
+                                                            <option value="14">14</option>
+
+                                                            <option value="15">15</option>
+
+                                                            <option value="16">16</option>
+
+                                                            <option value="17">17</option>
+
+                                                            <option value="18">18</option>
+
+                                                            <option value="19">19</option>
+
+                                                            <option value="20">20</option>
+
+                                                            <option value="21">21</option>
+
+                                                            <option value="22">22</option>
+
+                                                            <option value="23">23</option>
+
+                                                            <option value="24">24</option>
+
+                                                            <option value="25">25</option>
+
+                                                            <option value="26">26</option>
+
+                                                            <option value="27">27</option>
+
+                                                            <option value="28">28</option>
+
+                                                            <option value="29">29</option>
+
+                                                            <option value="30">30</option>
+
+                                                            <option value="31">31</option>
+
+                                                            <option value="32">32</option>
+
+                                                            <option value="33">33</option>
+
+                                                            <option value="34">34</option>
+
+                                                            <option value="35">35</option>
+
+                                                            <option value="36">36</option>
+
+                                                            <option value="37">37</option>
+
+                                                            <option value="38">38</option>
+
+                                                            <option value="39">39</option>
+
+                                                            <option value="40">40</option>
+
+                                                            <option value="41">41</option>
+
+                                                            <option value="42">42</option>
+
+                                                            <option value="43">43</option>
+
+                                                            <option value="44">44</option>
+
+                                                            <option value="45">45</option>
+
+                                                            <option value="46">46</option>
+
+                                                            <option value="47">47</option>
+
+                                                            <option value="48">48</option>
+
+                                                            <option value="49">49</option>
+
+                                                            <option value="50">50</option>
+
+                                                        </select>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="check_ch">
+                                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 nopadding">
+                                                    <div class="btn-cart-products">
+                                                        <button id="buy-now-qv" type="button" onclick="BuyNowProductQuickView(); ga('send', 'event', 'MuaHang', 'MuaNgay', 'ChiTietSanPham');" class="btn-detail btn-color-buy btn-min-width btn-mgt">
+                                                            Mua ngay
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 nopadding">
+                                                    <button id="add-to-cart-qv" type="button" onclick="AddCartProductQuickView(); ga('send', 'event', 'MuaHang', 'ChoVaoGio', 'XemNhanhSanPham');" class="btn-detail btn-color-add btn-min-width btn-mgt" name="add">
+                                                        Cho vào giỏ hàng
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                                <div class="wrapper-deatil hidden" tabindex="-1" role="dialog" id="combo-popup">
+                                    <div class="container" role="document">
+                                        <div class="row">
+                                            <div class="title-combo">
+                                                <h2>MUA COMBO GIÁ RẺ HƠN</h2>
+                                            </div>
+                                            <div class="combo-body">
+                                                <div id="combo-program" data-id="1005701396" data-title="Viên Uống Tăng Cường Hóc Môn DHEA 100 viên"></div>
+                                            </div>
+                                            <div class="combo-footer"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="haravan-promotion clone">
+                                    <div>
+                                        <label class="combo-product" data-pid="" data-countbuy="" data-id="">
+                                            <div class="text-center">
+                                                <img class="combo-img" src="">
+                                            </div>
+                                            <p class="discount-promotion-title"><b></b></p>
+                                            <p class="discount-promotion-price">
+                                                <b></b>
+                                                <del></del>
+                                            </p>
+                                            <p></p>
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on("click", '.quick-view', function (e) {
+
+        
+   
+        $.ajax({
+            url: 'Home/Details',
+            data: { id: $(this).data('id')},
+            type: 'post',
+            success: function (data) {
+                console.log(data);
+                console.log(data.lsProduct.description);
+                $('#productDescript').text(data.lsProduct.name);
+                $('#productPrice').text(data.lsProduct.price);
+            }
+        });
+
+        $('#quick-view-modal').modal('show');
+    });
+
+</script>

@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_User_layout.cshtml";
+}
+@model fitness.Models.Account
+<div class="clearfix">
+
+    <div id="layout-page" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <span class="header-contact header-page clearfix">
+            <h1>Tạo tài khoản</h1>
+        </span>
+        <div class="userbox">
+
+            <p class="text-center">
+                Xin vui lòng nhập đầy đủ thông tin dưới đây để tạo tài khoản tại iFitness.vn
+            </p>
+
+
+            <form asp-controller="customer" asp-action="register" method="post" >
+             
+
+                <div class="clearfix large_form">
+                    <label for="last_name" class="icon-field"><i class="icon-login icon-user "></i></label>
+                    <input asp-for="username" required="required" type="text" value=""  placeholder="username" id="username" class="text" size="30">
+                </div>
+                <div class="clearfix large_form">
+                    <label for="password" class="icon-field"><i class="icon-login icon-shield "></i></label>
+                    <input asp-for="password" required="required" type="password" value="" placeholder="password"  id="password" class="password text" size="30">
+                </div>
+
+
+                <div class="clearfix large_form">
+                    <label for="first_name" class="icon-field"><i class="icon-login icon-user "></i></label>
+                    <input asp-for="fullname"  required="required" type="text" value=""  placeholder="fullname" id="fullname" class="text" size="30">
+                </div>
+
+                <div class="clearfix large_form">
+                    <label for="email" class="icon-field"><i class="icon-login icon-envelope "></i></label>
+                    <input asp-for="email" required="required" type="email" value="" placeholder="Email" id="email" class="text" size="30">
+                </div>
+
+                <div class="action_bottom">
+                    <input class="btn" type="submit" value="Đăng ký">
+                </div>
+                <div class="action_bottom">
+                    <a class="come-back btn" style="background:#3a3a3c;" href="">Đăng nhập</a>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div><!-- #register -->
+
+
+</div>

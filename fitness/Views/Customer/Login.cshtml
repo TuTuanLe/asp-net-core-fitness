@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_User_layout.cshtml";
+}
+
+
+<div class="clearfix">
+
+    <div id="layout-page" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <span class="header-contact header-page clearfix">
+            <h1>Đăng nhập</h1>
+        </span>
+        <div class="userbox">
+            @if (ViewBag.error != null)
+            {
+                <div class="errors">
+                    <ul>
+                        <li>Thông tin đăng nhập không hợp lệ.</li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <p class="text-center">
+                    Xin vui lòng nhập Email và password để đăng nhập
+                </p>
+            }
+
+
+            <form asp-controller="customer" asp-action="login" method="post">
+
+                <div class="clearfix large_form">
+                    <label for="email" class="icon-field"><i class="icon-login icon-envelope "></i></label>
+                    <input name="email" required="required" type="email" value="" placeholder="Email" id="email" class="text" size="30">
+                </div>
+
+                <div class="clearfix large_form">
+                    <label for="password" class="icon-field"><i class="icon-login icon-shield "></i></label>
+                    <input name="password" required="required" type="password" value="" placeholder="password" id="password" class="password text" size="30">
+                </div>
+
+                <div class="action_bottom">
+                    <input class="btn" type="submit" value="Đăng Nhập">
+                </div>
+                <div class="req_pass">
+                    <a href="">Quên mật khẩu</a>
+                    hoặc
+                    <a asp-controller="customer" asp-action="register">Đăng kí</a>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+
+
+</div>

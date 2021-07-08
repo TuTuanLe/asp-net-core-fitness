@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_User_layout.cshtml";
+}
+
+@model fitness.Models.Account;
+<div id="layout-page" class="header-account col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+    <a href="//ifitness.vn/pages/uu-dai-danh-rieng-cho-khach-hang-tai-ifitness"><img src="//theme.hstatic.net/1000185761/1000461179/14/uudai-thanh-vien-vip-ifitness.jpg?v=1828"></a>
+    <span class="header-contact header-page clearfix">
+        <h2>Tài khoản của bạn</h2>
+    </span>
+    <div class="col-xs-12 col-sm-3 sidebar-account">
+        <div class="block-content">
+            <ul>
+                <li class="current"><a href="#"><i class="fa fa-user" aria-hidden="true"></i>Thông tin tài khoản</a></li>
+                <li><a href="/account/addresses"><i class="fa fa-map-marker" aria-hidden="true"></i>Danh sách địa chỉ</a></li>
+                <li class="last"><a asp-action="logout" asp-controller="customer"><i class="fa fa-sign-out" aria-hidden="true"></i>Đăng xuất</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-9 p-0-m">
+
+
+        @if (ViewBag.Success == null)
+        {
+            <p class="title-detail">
+                Thông tin tài khoản
+            </p>
+        }
+        else
+        {
+            <p class="title-detail">
+                @ViewBag.Success
+            </p>
+        }
+
+
+        <div class="col-xs-12 col-md-12" id="customer_sidebar">
+            <form asp-controller="customer" asp-action="profile" method="post">
+                <input asp-for="id" type="hidden" />
+                <input asp-for="status" type="hidden" />
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-login icon-user"></i></span>
+                    <input class="form-control textbox" asp-for="username" placeholder="username" id="username" size="30" disabled>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-login icon-shield"></i></span>
+                    <input class="form-control textbox" asp-for="password" type="password" placeholder="password" size="30">
+
+                </div>
+
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-login icon-user"></i></span>
+                    <input class="form-control textbox" asp-for="fullname" required="required" type="text" placeholder="fullname" id="fullname" size="30">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-login icon-envelope"></i></span>
+                    <input class="form-control textbox" asp-for="email" required="required" type="email" placeholder="Email" id="email" class="text" size="30">
+                </div>
+
+                <div class="action_link action_edit pull-right hidden-xs">
+                    <button type="submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Cập nhật tài khoản</button>
+                </div>
+
+
+
+            </form>
+
+
+
+        </div>
+
+
+
+        <div id="customer_orders" class="col-xs-12 col-md-12">
+            <div class="wrap_order">
+                <p class="title-detail">Danh sách đơn hàng mới nhất</p>
+
+                <p>Bạn chưa đặt mua sản phẩm.</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+

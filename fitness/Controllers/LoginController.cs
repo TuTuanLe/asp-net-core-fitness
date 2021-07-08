@@ -18,7 +18,7 @@ namespace fitness.Controllers
             db = _db;
         }
  
-
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -26,13 +26,13 @@ namespace fitness.Controllers
 
 
         [HttpPost]
-        [Route("process")]
-        public IActionResult Process(string username, string password)
+        public IActionResult Index(string username, string password)
         {
+           
             var account = processLogin(username, password);
             if (account != null)
             {
-                securityManager.SignIn(this.HttpContext, account);
+                securityManager.SignIn(this.HttpContext, account, "Admin_Schema");
                 return RedirectToAction("index", "DashBoard");
             }
             else
@@ -59,7 +59,7 @@ namespace fitness.Controllers
         [Route("signout")]
         public IActionResult signout()
         {
-            securityManager.SignOut(this.HttpContext);
+            securityManager.SignOut(this.HttpContext, "Admin_Schema");
             return RedirectToAction("index", "login");
         }
 
