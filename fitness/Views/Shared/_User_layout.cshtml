@@ -801,20 +801,8 @@
                                 <div class="topbar-cart right">
 
                                     <div class="shopping_cart">
-                                        <a href="/cart" title="giỏ hàng" rel="nofollow">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            <span class="top-cart"> :</span>
-                                            <span class="ajax_cart_no_product ajax_cart_quantity">0</span>
-                                        </a>
-                                        <div class="cart_content hidden-xs" id="view-cart">
-
-                                            <div style="padding:0 20px;">
-                                                <p style="margin:0" class="text-center">Giỏ hàng của bạn đang trống</p>
-                                                <p class="text-center"><a href="https://ifitness.vn/">Tiếp tục mua hàng</a></p>
-                                            </div>
-
-                                        </div>
-                                        <!-- .cart_block -->
+                                        @await Component.InvokeAsync("CartLeft")
+                                        <div class="show_lsProduct"></div>
                                     </div>
 
                                 </div>
@@ -2149,6 +2137,9 @@
                     </div>
                 </div>
 
+               
+                
+                
                 <script>
                     $(document).ready(function () {
                         $(".product_tabs_slider").each(function () {

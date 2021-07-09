@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_User_layout.cshtml";
+}
+
+<div id="cart">
+    <div class="container" style="padding-right:0px;padding-left:0px;">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <!-- Begin empty cart -->
+            <!-- Begin cart -->
+            <div class="row content-cart-left ">
+                <div id="layout-page" class="col-md-12">
+                    <span class="header-page clearfix">
+                        <h2>Giỏ hàng của bạn (@ViewBag.countItems sản phẩm) </h2>
+                    </span>
+                    <div class="alert-custom col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-xs">
+                        <div class="alert_checkout text-left">
+                            <div class="alert alert-warning fade in"><a href="/account" style="color:#333"><span style="color:#337ab7">Đăng nhập</span> để lưu lại thông tin và dễ dàng hơn trong việc mua hàng</a></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <form action="/cart" method="post" id="cartformpage">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th width="10%" class="image">Hình</th>
+                                        <th width="40%" class="item">Sản phẩm</th>
+                                        <th width="20%" class="qty">Số lượng</th>
+                                        <th width="20%" class="single_price">Đơn giá</th>
+                                        <th width="10%" class="price">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                @{ 
+                                    int total = 0;
+                                }
+                                 @foreach (var item in ViewBag.cart)
+                                 {
+                                     total += item.Price * item.Quantity;
+                                    <tr class="list-carts ">
+                                        <td class="image">
+                                            <div class="product_image">
+                                                <a asp-action="detailProduct" asp-controller="home" asp-route-id="@item.Id">
+                                                    <img src="~/product/@item.PathPhoto">
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td class="item">
+                                            <a style="color:#3a3a3c;" href="/products/vien-ho-tro-xuong-khop-glucosamine-chondroitin-msm-90-vien">
+                                                @item.Name
+                                            </a>
+                                            <span class="variant_title">90 Viên</span>
+                                            <a asp-action="remove" asp-controller="cart" asp-route-id="@item.Id" class="cart hidden-xs click-delete">
+                                                <i class="fa fa-trash fa-lg"></i> Bỏ sản phẩm
+                                            </a>
+                                        </td>
+
+                                        <td class="qty">
+                                            <label class="visible-xs">Số lượng: </label>
+                                            <select >
+
+                                                <option value="@item.Quantity" selected="">@item.Quantity</option>
+
+
+                                            </select>
+                                            <a asp-action="remove" asp-controller="cart" asp-route-id="@item.Id"  class="visible-xs cart click-delete">
+                                                <i class="fa fa-trash fa-lg"></i> Xóa
+                                            </a>
+                                        </td>
+                                        <td class="single_price">
+                                            <p class="product-price"><span style="color:#383838;font-size:14px;">Giá sản phẩm:</span> @item.Price ₫</p>
+
+
+
+                                            <del>550,000₫</del>
+                                            <br>
+                                            <span>Tiết kiệm: 20%</span>
+
+
+
+                                        </td>
+                                        <td class="price">@(item.Price * item.Quantity) ₫</td>
+                                    </tr>
+
+                                }
+
+
+                                    <tr class="summary" style="background: #fdfdfd;">
+                                        <td class="image">&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td class="text-center"><b>Tổng cộng:</b></td>
+                                        <td style="font-weight: bold;">1</td>
+                                        <td class="price">
+                                            <span class="total" id="total-carts">
+                                                
+                                                <strong>@total ₫</strong>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            <div class="col-md-12">
+                                <p class="alert alert-info">Chỉ cần mua thêm <span style="color:red;font-weight:700;">12312 ₫ </span> nữa thôi là bạn sẽ được <strong>[TẶNG NGAY] Băng quấn cổ tay Live Up hoặc dây nhảy Live Up</strong> rồi đó - Xem ngay <a href="https://ifitness.vn/collections/san-pham-khuyen-mai/">các sản phẩm đang có giá tốt tại đây.</a><br><span style="font-size:small">***Lưu ý: Các chương trình khuyến mãi không được áp dụng cùng nhau.</span></p>
+
+
+                            </div>
+                            <div class="col-md-4 inner-left inner-right nopadding">
+                                <div class="checkout-buttons clearfix">
+                                    <label for="note">Ghi chú </label><br>
+                                    <textarea id="note" name="note" rows="4" cols="40"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8 col-xs-12 cart-buttons inner-right inner-left nopadding">
+                                <div class="buttons clearfix">
+                                    <button type="submit" id="checkout" class="button-default button button-medium" name="checkout" value="">Thanh toán</button>
+                                    <button type="button" onclick="UpdateCartFromCart();" id="update-cart" class="button-default button button-medium" name="update" value="">Cập nhật</button>
+                                    <a href="https://ifitness.vn/" class="continue"><i class="fa fa-reply" aria-hidden="true"></i> Tiếp tục mua hàng</a>
+                                </div>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="visible-xs col-xs-12 mobile_checkout">
+            <div class="grpbtnFunc col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                Tổng tiền: <span id="amount_price">440,000₫</span>
+            </div>
+            <button id="trigger_checkout">
+                Tiến hành thanh toán
+            </button>
+
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="content-cart-left">
+
+                <div class="adr box bg-white" id="box_delivery_policies">
+                    <div class="header">
+                        <h4 class="title">MIỄN PHÍ GIAO HÀNG</h4>
+                    </div>
+                    <div class="body">
+                        <div class="adr list" id="delivery_policies_list">
+                            <div class="item frist">
+                                <div class="icon"><i class="adr huge icon truck"></i></div>
+                                <div class="text"><div style="     font-size: 12px; "> <strong>TPHCM:</strong> với ĐH trên 600.000đ<br> <strong>Toàn quốc:</strong> Hỗ trợ 50% phí ship ĐH <br>trên 1.000.000đ</div></div>
+                            </div>
+                            <div class="item ">
+                                <div class="icon"><i class="adr huge icon location2"></i></div>
+                                <div class="text"><div style="font-size: 12px; "> <strong>UY TÍN &amp; CHẤT LƯỢNG</strong></div>100% sản phẩm chính hãng<br>Thanh toán khi nhận hàng</div>
+                            </div>
+                            <div class="item ">
+                                <div class="icon"><i class="adr huge icon box"></i></div>
+                                <div class="text"><div style="font-size: 12px; "> <strong>MUA HÀNG NHANH</strong><br><span style="color:#fbae40;font-size:18px;"><strong>028 399.75.999</strong></span><br> <span>Thứ 2 - 7 : 08g30 - 17g30</span></div></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+   
+       
+
+    </div>
+    <!-- End cart -->
+</div>

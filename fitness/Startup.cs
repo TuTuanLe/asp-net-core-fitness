@@ -53,6 +53,7 @@ namespace fitness
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connection));
 
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewData["Title"] = "index";
+    Layout = null;
+}
+<a href="/cart" title="giỏ hàng" rel="nofollow">
+    <i class="fa fa-shopping-cart"></i>
+    <span class="top-cart"> :</span>
+    <span class="ajax_cart_no_product ajax_cart_quantity">@ViewBag.countItems</span>
+</a>
+
+
+
+
+
+
+
+@{
+    int total = 0;
+}
+@if (ViewBag.countItems == 0)
+{
+    <div class="cart_content hidden-xs">
+        <div style="padding:0 20px;">
+            <p style="margin:0" class="text-center">Giỏ hàng của bạn đang trống</p>
+            <p class="text-center"><a asp-controller="home" asp-action="index">Tiếp tục mua hàng</a></p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="cart_content hidden-xs" id="view-cart">
+
+        @foreach (var item in ViewBag.cart)
+        {
+            total += item.Price * item.Quantity;
+        <div class="item-cart clearfix" id="item_cart_@item.Id">
+            
+            <div class="nav-bar-item">
+                <figure class="image-cart ">
+                    <a asp-action="detailProduct" asp-controller="home">
+                        <img src="~/product/@item.PathPhoto">
+                    </a>
+                </figure>
+                <div class="text_cart">
+                    <h4>
+                        <a asp-action="detailProduct" asp-controller="home">@item.Name</a>
+                    </h4>
+                    <div class="price-line">
+                        <div class="down-case">@item.Quantity  x <span class="new-price">@(String.Format("{0:#,##0.##}", item.Price))₫  </span></div>
+                    </div>
+                </div>
+                <span class="remove_link">
+                    <a class="remove_item" data-id="@item.Id"><i class="fa fa-times-circle"></i></a>
+                </span>
+            </div>
+        </div>
+        }
+
+        <div class="text-mini-cart">
+            <span class=" text-left">Tổng tiền:</span>
+            <span class="cart_block_total">@(String.Format("{0:#,##0.##}", total))₫</span>
+        </div>
+        <div class="cart-check-mini">
+            <a class="button-small" href="/checkout">
+                <span>
+                    Thanh toán <i class="fa fa-chevron-right"></i>
+                </span>
+            </a>
+            <a asp-action="index" asp-controller="cart" type="button" class="btn btn--full cart__shoppingcart" name="shoppingCart">
+                Vào giỏ hàng →
+            </a>
+        </div>
+
+    </div>
+}
+

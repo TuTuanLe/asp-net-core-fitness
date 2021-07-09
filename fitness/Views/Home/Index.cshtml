@@ -84,7 +84,7 @@
                                                     </a>
                                                     <div class="functional-buttons clearfix">
                                                         <div class="cart">
-                                                            <a class="btn-buy ajax_add_to_cart btn button asdasd " href="">
+                                                            <a class="btn-buy ajax_add_to_cart_product btn button" data-id="@product.Id">
                                                                 <span>
                                                                     <i class="fa fa-cart-plus" aria-hidden="true"></i>
                                                                     Thêm vào giỏ
@@ -92,7 +92,7 @@
                                                             </a>
                                                         </div>
 
-                                                        <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#"  data-id="@product.Id"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
+                                                        <div class="quickview"><a class="btn-like mask-view quick-view btn btn-outline" href="#" data-id="@product.Id"><i class="fa fa-eye"></i><span>Xem nhanh</span></a></div>
                                                     </div>
                                                 </div>
                                                 <div class="product-detail clearfix">
@@ -329,7 +329,7 @@
                                     </div>
 
 
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -410,15 +410,15 @@
                                 <div class="product-type"><i class="fa fa-tags"></i> <b>Loại : <a title="Show type" href="/collections/types?q=vien">Viên</a></b></div>
                                 <div class="goods-subtitle" itemprop="description">
 
-                                    <ul >
+                                    <ul>
                                         <li><strong>Viên uống tăng cường hocmon DHEA</strong> giúp cân bằng nội tiết và cải thiện sinh lý nữ</li>
-                                        
+
                                     </ul>
                                     <p>
                                     </p>
                                 </div>
                                 <div class="product-price-p20 row">
-                                    <div class="product-price col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" id="price-preview-qv"><span id="productPrice" >456,000₫</span><del>480,000₫</del></div>
+                                    <div class="product-price col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" id="price-preview-qv"><span id="productPrice">456,000₫</span><del>480,000₫</del></div>
 
                                     <div class="pt-sale-qv col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">Tiết kiệm : <span id="price-tk">24,000₫ (-5%)</span></div>
                                 </div>
@@ -661,7 +661,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
 
 
@@ -671,12 +671,13 @@
 
 <script>
     $(document).on("click", '.quick-view', function (e) {
+        var temp = $(this).data('id');
+        alert(temp);
 
-        
-   
+
         $.ajax({
             url: 'Home/Details',
-            data: { id: $(this).data('id')},
+            data: { id: $(this).data('id') },
             type: 'post',
             success: function (data) {
                 console.log(data);
@@ -688,5 +689,104 @@
 
         $('#quick-view-modal').modal('show');
     });
+    $(document).on("click", '.remove_item', function (e) {
+        var temp = $(this).data('id');
+        $.ajax({
+            url: 'Cart/RemoveItem',
+            data: { id: temp },
+            type: 'post',
+            success: function (data) {
+                var total = 0;
+                if (data.carts.length != 0) {
+                    $.each(data.carts, function (index, item) {
+                        total += item.quantity * item.price;
+                    });
+
+                    var str = '#item_cart_' + temp;
+                    $(str).remove();
+                    $('#total_entire_product').text(total);
+                    
+                }
+                else {
+                    var str = '';
+                    str+='<div class="cart_content hidden-xs">                                                                  ';
+                    str+='    <div style="padding:0 20px;">                                                                     ';
+                    str+='        <p style="margin:0" class="text-center">Giỏ hàng của bạn đang trống</p>                       ';
+                    str+='        <p class="text-center"><a asp-controller="home" asp-action="index">Tiếp tục mua hàng</a></p>  ';
+                    str+='    </div>                                                                                            ';
+                    str += '</div>                                                                                               ';
+                    $('.cart_content').remove();
+                    $('.show_lsProduct').empty();
+                    $('.show_lsProduct').append(str);
+                }
+                $('.ajax_cart_quantity').text(data.carts.length);
+            }
+        })
+    });
+
+    $(document).on("click", '.ajax_add_to_cart_product', function (e) {
+        $.ajax({
+            url: 'Cart/AddToCart',
+            data: { id: $(this).data('id') },
+            type: 'post',
+            success: function (data) {
+                console.log(data);
+                var str = '<div class="cart_content hidden-xs" id="view-cart">';
+                var total = 0;
+                $.each(data.carts, function (index, item) {
+
+                    console.log(item);
+                    total = item.price * item.quantity;
+                    str+='        <div class="item-cart clearfix" id="item_cart_'+item.id+'">                                                                                                              ';
+                    str+='            <div class="nav-bar-item">                                                                                                                ';
+                    str+='                <figure class="image-cart ">                                                                                                          ';
+                    str+='                    <a asp-action="detailProduct" asp-controller="home">                                                                              ';
+                    str+='                        <img src="/product/'+ item.pathPhoto +  '">                                                                                   ';
+                    str+='                    </a>                                                                                                                              ';
+                    str+='                </figure>                                                                                                                             ';
+                    str+='                <div class="text_cart">                                                                                                               ';
+                    str+='                    <h4>                                                                                                                              ';
+                    str+='                        <a asp-action="detailProduct" asp-controller="home">'+item.name+'</a>                                                            ';
+                    str+='                    </h4>                                                                                                                             ';
+                    str+='                    <div class="price-line">                                                                                                          ';
+                    str += '                        <div class="down-case">' + item.quantity+'  x <span class="new-price">'+ item.price +' ₫  </span></div> ';
+                    str+='                    </div>                                                                                                                            ';
+                    str+='                </div>                                                                                                                                ';
+                    str+='                <span class="remove_link">                                                                                                            ';
+                    str+='                    <a class="remove_item" data-id="'+item.id+'" ><i class="fa fa-times-circle"></i></a>                  ';
+                    str+='                </span>                                                                                                                               ';
+                    str+='            </div>                                                                                                                                    ';
+                    str+='        </div>                                                                                                                                        ';
+
+                });
+                                                                                                                                        
+                  str+='                                                                                                                                                      ';
+                  str+='    <div class="text-mini-cart">                                                                                                                      ';
+                  str+='        <span class=" text-left">Tổng tiền:</span>                                                                                                    ';
+                  str+='        <span class="cart_block_total" id="total_entire_product">'+ total + '  ₫</span>                                                                                         ';
+                  str+='    </div>                                                                                                                                            ';
+                  str+='    <div class="cart-check-mini">                                                                                                                     ';
+                  str+='        <a class="button-small" href="/checkout">                                                                                                     ';
+                  str+='            <span>                                                                                                                                    ';
+                  str+='                Thanh toán <i class="fa fa-chevron-right"></i>                                                                                        ';
+                  str+='            </span>                                                                                                                                   ';
+                  str+='        </a>                                                                                                                                          ';
+                  str+='        <a asp-action="index" asp-controller="cart" type="button" class="btn btn--full cart__shoppingcart" name="shoppingCart">                       ';
+                  str+='            Vào giỏ hàng →                                                                                                                            ';
+                  str+='        </a>                                                                                                                                          ';
+                  str+='    </div>                                                                                                                                            ';
+                  str+='                                                                                                                                                      ';
+                  str += '</div>                                                                                                                                              ';
+
+                $('.cart_content').remove();
+                $('.show_lsProduct').empty();
+                $('.show_lsProduct').append(str);
+                $('.ajax_cart_quantity').text(data.carts.length);
+            }
+        });
+
+    });
 
 </script>
+
+
