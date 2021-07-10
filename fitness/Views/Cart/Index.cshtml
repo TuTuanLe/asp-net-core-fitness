@@ -9,126 +9,124 @@
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <!-- Begin empty cart -->
             <!-- Begin cart -->
-            <div class="row content-cart-left ">
-                <div id="layout-page" class="col-md-12">
-                    <span class="header-page clearfix">
-                        <h2>Giỏ hàng của bạn (@ViewBag.countItems sản phẩm) </h2>
-                    </span>
-                    <div class="alert-custom col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-xs">
-                        <div class="alert_checkout text-left">
-                            <div class="alert alert-warning fade in"><a href="/account" style="color:#333"><span style="color:#337ab7">Đăng nhập</span> để lưu lại thông tin và dễ dàng hơn trong việc mua hàng</a></div>
+            <div class="row content-cart-left content_replace">
+                @if (ViewBag.countItems == 0)
+                {
+                    <div id="layout-page" class="col-md-12 wrapper">
+                        <span class="header-page clearfix">
+                            <h1>Giỏ hàng</h1>                              
+                        </span>                                                
+                        <p class="text-center">
+                            <img style="margin:0 auto;" src="//theme.hstatic.net/1000185761/1000461179/14/shopping-cart-emty-icon.png?v=1834" alt="shopping cart empty" class="img-responsive img-center"><br>
+                                Không có sản phẩm nào trong giỏ hàng!           
+                        </p>                                                 
+                        <p class="text-center">
+                            <a asp-controller="home" asp-action="index">
+                                <i class="fa fa-reply"></i> Tiếp tục mua hàng  
+                            </a>                                            
+                        </p>                                                  
+                    </div>
+                }
+                else
+                {
+                    <div id="layout-page" class="col-md-12">
+                        <span class="header-page clearfix">
+                            <h2>Giỏ hàng của bạn (@ViewBag.countItems sản phẩm) </h2>
+                        </span>
+                        <div class="alert-custom col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-xs">
+                            <div class="alert_checkout text-left">
+                                <div class="alert alert-warning fade in"><a href="/account" style="color:#333"><span style="color:#337ab7">Đăng nhập</span> để lưu lại thông tin và dễ dàng hơn trong việc mua hàng</a></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <form action="/cart" method="post" id="cartformpage">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th width="10%" class="image">Hình</th>
+                                            <th width="40%" class="item">Sản phẩm</th>
+                                            <th width="20%" class="qty">Số lượng</th>
+                                            <th width="20%" class="single_price">Đơn giá</th>
+                                            <th width="10%" class="price">Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        @{
+                                            int total = 0;
+                                        }
+                                        @foreach (var item in ViewBag.cart)
+                                        {
+                                            total += item.Price * item.Quantity;
+                                            <tr class="list-carts" id="remove_cart_@item.Id">
+                                                <td class="image">
+                                                    <div class="product_image">
+                                                        <a asp-action="detailProduct" asp-controller="home" asp-route-id="@item.Id">
+                                                            <img src="~/product/@item.PathPhoto">
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td class="item">
+                                                    <a style="color:#3a3a3c;" href="/products/vien-ho-tro-xuong-khop-glucosamine-chondroitin-msm-90-vien">
+                                                        @item.Name
+                                                    </a>
+                                                    <span class="variant_title">90 Viên</span>
+                                                    <a class="cart hidden-xs click-delete-cart" data-id="@item.Id">
+                                                        <i class="fa fa-trash fa-lg"></i> Bỏ sản phẩm
+                                                    </a>
+                                                </td>
+
+                                                <td class="qty">
+                                                    <label class="visible-xs">Số lượng: </label>
+                                                    <select>
+
+                                                        <option value="@item.Quantity" selected="">@item.Quantity</option>
+
+
+                                                    </select>
+                                                    <a class="visible-xs cart click-delete">
+                                                        <i class="fa fa-trash fa-lg"></i> Xóa
+                                                    </a>
+                                                </td>
+                                                <td class="single_price">
+                                                    <p class="product-price"><span style="color:#383838;font-size:14px;">Giá sản phẩm:</span>@(String.Format("{0:#,##0.##}", item.Price))₫</p>
+                                                    <del>550,000₫</del>
+                                                    <br>
+                                                    <span>Tiết kiệm: 20%</span>
+
+                                                </td>
+                                                <td class="price">@(String.Format("{0:#,##0.##}", item.Price * item.Quantity))₫</td>
+                                            </tr>
+
+                                        }
+
+
+                                        <tr class="summary" style="background: #fdfdfd;">
+                                            <td class="image">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="text-center"><b>Tổng cộng:</b></td>
+                                            <td style="font-weight: bold;">1</td>
+                                            <td class="price">
+                                                <span class="total" id="total-carts">
+
+                                                    <strong id="total_carts">@total ₫</strong>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <div class="col-md-8 col-xs-12 cart-buttons inner-right inner-left nopadding">
+                                    <div class="buttons clearfix">
+                                        <a asp-action="checkOut" asp-controller="cart" class="button-default button button-medium" >Đi đến đơn hàng</a>
+                                        <a asp-action="index" asp-controller="home" class="continue"><i class="fa fa-reply" aria-hidden="true"></i> Tiếp tục mua hàng</a>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <form action="/cart" method="post" id="cartformpage">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th width="10%" class="image">Hình</th>
-                                        <th width="40%" class="item">Sản phẩm</th>
-                                        <th width="20%" class="qty">Số lượng</th>
-                                        <th width="20%" class="single_price">Đơn giá</th>
-                                        <th width="10%" class="price">Thành tiền</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                @{ 
-                                    int total = 0;
-                                }
-                                 @foreach (var item in ViewBag.cart)
-                                 {
-                                     total += item.Price * item.Quantity;
-                                    <tr class="list-carts ">
-                                        <td class="image">
-                                            <div class="product_image">
-                                                <a asp-action="detailProduct" asp-controller="home" asp-route-id="@item.Id">
-                                                    <img src="~/product/@item.PathPhoto">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="item">
-                                            <a style="color:#3a3a3c;" href="/products/vien-ho-tro-xuong-khop-glucosamine-chondroitin-msm-90-vien">
-                                                @item.Name
-                                            </a>
-                                            <span class="variant_title">90 Viên</span>
-                                            <a asp-action="remove" asp-controller="cart" asp-route-id="@item.Id" class="cart hidden-xs click-delete">
-                                                <i class="fa fa-trash fa-lg"></i> Bỏ sản phẩm
-                                            </a>
-                                        </td>
-
-                                        <td class="qty">
-                                            <label class="visible-xs">Số lượng: </label>
-                                            <select >
-
-                                                <option value="@item.Quantity" selected="">@item.Quantity</option>
-
-
-                                            </select>
-                                            <a asp-action="remove" asp-controller="cart" asp-route-id="@item.Id"  class="visible-xs cart click-delete">
-                                                <i class="fa fa-trash fa-lg"></i> Xóa
-                                            </a>
-                                        </td>
-                                        <td class="single_price">
-                                            <p class="product-price"><span style="color:#383838;font-size:14px;">Giá sản phẩm:</span> @item.Price ₫</p>
-
-
-
-                                            <del>550,000₫</del>
-                                            <br>
-                                            <span>Tiết kiệm: 20%</span>
-
-
-
-                                        </td>
-                                        <td class="price">@(item.Price * item.Quantity) ₫</td>
-                                    </tr>
-
-                                }
-
-
-                                    <tr class="summary" style="background: #fdfdfd;">
-                                        <td class="image">&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td class="text-center"><b>Tổng cộng:</b></td>
-                                        <td style="font-weight: bold;">1</td>
-                                        <td class="price">
-                                            <span class="total" id="total-carts">
-                                                
-                                                <strong>@total ₫</strong>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <br>
-                            <div class="col-md-12">
-                                <p class="alert alert-info">Chỉ cần mua thêm <span style="color:red;font-weight:700;">12312 ₫ </span> nữa thôi là bạn sẽ được <strong>[TẶNG NGAY] Băng quấn cổ tay Live Up hoặc dây nhảy Live Up</strong> rồi đó - Xem ngay <a href="https://ifitness.vn/collections/san-pham-khuyen-mai/">các sản phẩm đang có giá tốt tại đây.</a><br><span style="font-size:small">***Lưu ý: Các chương trình khuyến mãi không được áp dụng cùng nhau.</span></p>
-
-
-                            </div>
-                            <div class="col-md-4 inner-left inner-right nopadding">
-                                <div class="checkout-buttons clearfix">
-                                    <label for="note">Ghi chú </label><br>
-                                    <textarea id="note" name="note" rows="4" cols="40"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="col-md-8 col-xs-12 cart-buttons inner-right inner-left nopadding">
-                                <div class="buttons clearfix">
-                                    <button type="submit" id="checkout" class="button-default button button-medium" name="checkout" value="">Thanh toán</button>
-                                    <button type="button" onclick="UpdateCartFromCart();" id="update-cart" class="button-default button button-medium" name="update" value="">Cập nhật</button>
-                                    <a href="https://ifitness.vn/" class="continue"><i class="fa fa-reply" aria-hidden="true"></i> Tiếp tục mua hàng</a>
-                                </div>
-                            </div>
-
-
-
-                        </form>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+                }
             </div>
 
         </div>
@@ -177,3 +175,65 @@
     </div>
     <!-- End cart -->
 </div>
+
+<script>
+    $(document).on("click", ".click-delete-cart", function () {
+        var id_remove = $(this).data('id');
+        $.ajax({
+            url: 'Cart/RemoveItem',
+            data: { id: $(this).data('id') },
+            type: 'post',
+            success: function (data) {
+                var total = 0;
+                if (data.carts.length != 0) {
+                    $.each(data.carts, function (index, item) {
+                        total += item.quantity * item.price;
+                    });
+                    
+                    var str = '#remove_cart_' + id_remove;
+                    $(str).remove();
+                    $("#total_carts").text(total);
+
+                    var str_cart_left = '#item_cart_' + id_remove;
+                    $(str_cart_left).remove();
+                    $('#total_entire_product').text(total + đ);
+                } else {
+                    var str = '';                                                              
+                        str+='    <div id="layout-page" class="col-md-12 wrapper">             ';
+                        str+='        <span class="header-page clearfix">                      ';
+                        str+='            <h1>Giỏ hàng</h1>                                    ';
+                        str+='        </span>                                                  ';
+                        str+='        <p class="text-center">                                  ';
+                        str+='            <img style="margin:0 auto;" src="//theme.hstatic.net/1000185761/1000461179/14/shopping-cart-emty-icon.png?v=1834" alt="shopping cart empty" class="img-responsive img-center"><br>';
+                        str+='                Không có sản phẩm nào trong giỏ hàng!            ';
+                        str+='        </p>                                                     ';
+                        str+='        <p class="text-center">                                  ';
+                        str+='            <a asp-controller="home" asp-action="index">         ';
+                        str+='                <i class="fa fa-reply"></i> Tiếp tục mua hàng    ';
+                        str+='            </a>                                                 ';
+                        str+='        </p>                                                     ';
+                    str += '    </div>                                                       ';
+
+                    $('.content_replace').empty();
+                    $('.content_replace').append(str);
+
+
+                    var str = '';
+                    str += '<div class="cart_content hidden-xs">                                                                  ';
+                    str += '    <div style="padding:0 20px;">                                                                     ';
+                    str += '        <p style="margin:0" class="text-center">Giỏ hàng của bạn đang trống</p>                       ';
+                    str += '        <p class="text-center"><a href="/">Tiếp tục mua hàng</a></p>  ';
+                    str += '    </div>                                                                                            ';
+                    str += '</div>                                                                                               ';
+                    $('.cart_content').remove();
+                    $('.show_lsProduct').empty();
+                    $('.show_lsProduct').append(str);
+              
+                }
+                $('.ajax_cart_quantity').text(data.carts.length);
+            }
+
+        });
+    });
+
+</script>

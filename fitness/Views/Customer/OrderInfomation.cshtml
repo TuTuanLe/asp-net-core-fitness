@@ -1,0 +1,188 @@
+﻿
+@{
+    ViewData["Title"] = "OrderInfomation";
+    Layout = "~/Views/Shared/_User_layout.cshtml";
+}
+
+
+
+<div id="layout-page" class="header-account col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+    <a href="//ifitness.vn/pages/uu-dai-danh-rieng-cho-khach-hang-tai-ifitness"><img src="//theme.hstatic.net/1000185761/1000461179/14/uudai-thanh-vien-vip-ifitness.jpg?v=1828"></a>
+    <span class="header-contact header-page clearfix">
+        <h2>Tài khoản của bạn</h2>
+    </span>
+    <div class="col-xs-12 col-sm-3 sidebar-account">
+        <div class="block-content">
+            <ul>
+                <li class="current"><a href="#"><i class="fa fa-user" aria-hidden="true"></i>Thông tin đơn hàng</a></li>
+                <li class="current"><a href="#"><i class="fa fa-user" aria-hidden="true"></i>Thông tin tài khoản</a></li>
+                <li><a href="/account/addresses"><i class="fa fa-map-marker" aria-hidden="true"></i>Danh sách địa chỉ</a></li>
+                <li class="last"><a asp-action="logout" asp-controller="customer"><i class="fa fa-sign-out" aria-hidden="true"></i>Đăng xuất</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-9 p-0-m">
+
+
+
+
+
+
+        <div id="customer_orders" class="col-xs-12 col-md-12">
+            <div class="wrap_order">
+                <p class="title-detail">Danh sách đơn hàng mới nhất</p>
+
+                <table id="asdasdasd">
+                    <thead>
+                        <tr>
+
+                            <th width="45%" class="item">Name</th>
+                            <th width="30%" class="qty">Created</th>
+                            <th width="30%" class="single_price">Status</th>
+                            <th width="15%" class="price">action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+
+                        @foreach (var item in ViewBag.invoice)
+                        {
+
+                            <tr class="list-carts" id="cart_detail_@item.Id">
+
+                                <td class="item">
+                                    @item.Name
+                                </td>
+
+                                <td class="qty">
+                                    @item.Created.ToString("MM/dd/yyyy")
+                                </td>
+                                <td class="single_price">
+                                    @(item.Status == 1 ? "Pending": "Done" )
+                                </td>
+                                <td class="price">
+                                    <a class="detail_invoice" data-id="@item.Id">detail </a>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).on("click", ".detail_invoice", function () {
+        var id_invoice = $(this).data('id');
+        $.ajax({
+            url: '/customer/details',
+            type: 'post',
+            data: { id: id_invoice },
+            success: function (data) {
+                var str = '<tr class="list-carts" id="remove_table_' + id_invoice + '" >';
+                str += ' <td colspan="4" width="100%"> ';
+                str += '<table id="remove_table_' + id_invoice + '" >                                                          ';
+                str += '    <thead>                                                      ';
+                str += '        <tr>                                                     ';
+                str += '            <th width="10%" class="image">Hình</th>              ';
+                str += '            <th width="40%" class="item">Sản phẩm</th>           ';
+                str += '            <th width="20%" class="qty">Số lượng</th>            ';
+                str += '            <th width="20%" class="single_price">Đơn giá</th>    ';
+                str += '            <th width="10%" class="price">Thành tiền</th>        ';
+                str += '        </tr>                                                    ';
+                str += '    </thead>                                                     ';
+                str += '    <tbody>                                                     ';
+
+                var total = 0;
+                $.each(data.lsInvoice, function (index, item) {
+                    total += item.amount;
+                    str += '<tr class="list-carts" id="remove_cart_item">                                                                                                  ';
+                    str += '    <td class="image">                                                                                                                            ';
+                    str += '        <div class="product_image">                                                                                                               ';
+                    str += '            <a asp-action="detailProduct" asp-controller="home" asp-route-id="item.Id">                                                           ';
+                    str += '                <img src="/product/' + item.pathPhoto + '">                                                                                              ';
+                    str += '            </a>                                                                                                                                  ';
+                    str += '        </div>                                                                                                                                    ';
+                    str += '    </td>                                                                                                                                         ';
+                    str += '    <td class="item">                                                                                                                             ';
+                    str += '        <a style="color:#3a3a3c;" href="">                                    ';
+                    str += '            ' + item.name + '                                                                                                                             ';
+                    str += '        </a>                                                                                                                                      ';
+                    str += '        <span class="variant_title">90 Viên</span>                                                                                                ';
+                    str += '        <a class="cart hidden-xs click-delete-cart" data-id="item.Id">                                                                            ';
+                    str += '            <i class="fa fa-trash fa-lg"></i> Bỏ sản phẩm                                                                                         ';
+                    str += '        </a>                                                                                                                                      ';
+                    str += '    </td>                                                                                                                                         ';
+                    str += '                                                                                                                                                  ';
+                    str += '    <td class="qty">                                                                                                                              ';
+                    str += '        <label class="visible-xs">Số lượng: </label>                                                                                              ';
+                    str += '        <select>                                                                                                                                  ';
+                    str += '                                                                                                                                                  ';
+                    str += '            <option value="item.Quantity" selected="">' + item.quantity + '</option>                                                                      ';
+                    str += '                                                                                                                                                  ';
+                    str += '                                                                                                                                                  ';
+                    str += '        </select>                                                                                                                                 ';
+                    str += '        <a class="visible-xs cart click-delete">                                                                                                  ';
+                    str += '            <i class="fa fa-trash fa-lg"></i> Xóa                                                                                                 ';
+                    str += '        </a>                                                                                                                                      ';
+                    str += '    </td>                                                                                                                                         ';
+                    str += '    <td class="single_price">                                                                                                                     ';
+                    str += '        <p class="product-price"><span style="color:#383838;font-size:14px;">Giá sản phẩm:</span>' + item.price + ' ₫</p> ';
+                    str += '        <br>                                                                                                                                      ';
+                    str += '                                                                                                                                                  ';
+                    str += '    </td>                                                                                                                                         ';
+                    str += '    <td class="price"> ' + item.amount + ' ₫</td>                                                           ';
+                    str += '</tr>                                                                                                                                             ';
+
+                });
+                str += '<tr class="summary" style="background: #fdfdfd;">           ';
+                str += '    <td class="image">&nbsp;</td>                           ';
+                str += '    <td>&nbsp;</td>                                         ';
+                str += '    <td class="text-center"><b>Tổng cộng:</b></td>          ';
+                str += '    <td style="font-weight: bold;">1</td>                   ';
+                str += '    <td class="price">                                      ';
+                str += '        <span class="total" id="total-carts">               ';
+                str += '                                                            ';
+                str += '            <strong id="total_carts">' + total + ' ₫</strong>      ';
+                str += '        </span>                                             ';
+                str += '    </td>                                                   ';
+                str += '</tr>                                                       ';
+                str += '    </tbody>                                                   ';
+                str += '</table>                                                       ';
+                str += '</td>';
+                str += '</tr>';
+
+                var id_show_table = '#cart_detail_' + id_invoice;
+
+                $('.detail_invoice').toggleClass("remove_table");
+                $('.remove_table').removeClass('detail_invoice');
+                $('.remove_table').text('hide');
+                $(id_show_table).after(str);
+
+            },
+        });
+
+        $(document).on("click", ".remove_table", function () {
+            var id_invoice = $(this).data('id');
+            
+
+            var remove_ = '#remove_table_' + id_invoice;
+            $(remove_).remove();
+            $('.remove_table').toggleClass("detail_invoice");
+            $('.detail_invoice').removeClass('remove_table');
+            $('.detail_invoice').text('detail');
+        });
+    });
+
+
+
+
+
+</script>
+
+

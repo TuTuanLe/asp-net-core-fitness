@@ -115,5 +115,34 @@ namespace fitness.Controllers
             ViewBag.Success = "Bạn đã cập nhật thành công :)";
             return View();
         }
+        public IActionResult OrderInfomation()
+        {
+            var user = User.FindFirst(ClaimTypes.Name);
+            var customer = db.Accounts.SingleOrDefault(a => a.username.Equals(user.Value));
+            ViewBag.invoice = customer.Invoices.OrderByDescending(i => i.Id).ToList();
+           
+            return View();
+        }
+        [HttpPost]
+        public JsonResult details(int id)
+        {
+            List<InvoiceDetail> lsInvoiceDetails = db.InvoiceDetails.Where(i => i.InvoiceId == id).ToList();
+            List<object> lsobject = new List<object>();
+            foreach(var invoiceDetail in lsInvoiceDetails)
+            {
+                Product product = db.Products.Where(i => i.Id == invoiceDetail.ProductId).SingleOrDefault();
+                Photos photo = product.Photoss.SingleOrDefault(p => p.Featured == true);
+                lsobject.Add(new
+                {
+                    ProductId  = invoiceDetail.ProductId,
+                    Quantity = invoiceDetail.Quantity,
+                    PathPhoto= photo.Name,
+                    Price = product.Price,
+                    Name = product.Name,
+                    Amount = product.Price * invoiceDetail.Quantity
+                });
+            }
+            return Json(new { LsInvoice = lsobject });
+        }
     }
 }

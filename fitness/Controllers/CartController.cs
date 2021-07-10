@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 namespace fitness.Controllers
 {
@@ -18,7 +19,10 @@ namespace fitness.Controllers
         {
              List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
-            ViewBag.countItems = cart.Count;
+            if(cart == null)
+                ViewBag.countItems = 0;
+            else
+                ViewBag.countItems = cart.Count;
 
             return View();
         }
@@ -150,6 +154,73 @@ namespace fitness.Controllers
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             return Json(new { carts = cart });
 
+        }
+
+        [HttpPost]
+        public JsonResult Update(int id, int quantity)
+        {
+            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            int index = exists(id, cart);
+            cart[index].Quantity = quantity;
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            return Json(new { carts = cart });
+        }
+
+        public IActionResult CheckOut()
+        {
+            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            ViewBag.cart = cart;
+            if (cart == null)
+                ViewBag.countItems = 0;
+            else
+                ViewBag.countItems = cart.Count;
+            var user = User.FindFirst(ClaimTypes.Name);
+            var account = new Account();
+            if (user !=null )
+            {
+                account = db.Accounts.SingleOrDefault(a => a.username.Equals(user.Value));
+            } 
+            ViewBag.User = account;
+            return View(account);
+        }
+        [HttpPost]
+        public IActionResult ProcessCheckOut(Account ac, bool customer_pick_at_location, bool payment_method_id)
+        {
+            var invoice = new Invoice()
+            {
+                Name = "Invoice Online",
+                Created = DateTime.Now,
+                Status = 1,
+                AccountId = ac.id
+            };
+            db.Invoices.Add(invoice);
+            db.SaveChanges();
+
+            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            foreach(var item in cart)
+            {
+                var invoiceDetails = new InvoiceDetail()
+                {
+                    InvoiceId = invoice.Id,
+                    ProductId = item.Id,
+                    Price = item.Price,
+                    Quantity = item.Quantity
+                };
+                db.InvoiceDetails.Add(invoiceDetails);
+                db.SaveChanges();
+            }
+            HttpContext.Session.Remove("cart");
+
+            ViewBag.ac = ac;
+            ViewBag.location = customer_pick_at_location;
+            ViewBag.Payment_COD_or_momo = payment_method_id;
+            return View();
+            //return RedirectToAction("orderInfomation", "customer");
+        }
+
+        public IActionResult Thanks()
+        {
+            return View();
         }
     }
 }

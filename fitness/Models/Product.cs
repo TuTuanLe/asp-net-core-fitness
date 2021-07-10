@@ -13,6 +13,7 @@ namespace fitness.Models
         public Product()
         {
             Photoss = new HashSet<Photos>();
+            InvoiceDetails = new HashSet< InvoiceDetail>();
         }
         [Key]
         public int Id { get; set; }
@@ -27,5 +28,6 @@ namespace fitness.Models
         public virtual Category Category { get; set; }
         
         public virtual ICollection<Photos> Photoss { get; set; }
+        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
     }
 }

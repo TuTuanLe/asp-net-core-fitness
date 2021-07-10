@@ -62,7 +62,7 @@ else
             <span class="cart_block_total">@(String.Format("{0:#,##0.##}", total))₫</span>
         </div>
         <div class="cart-check-mini">
-            <a class="button-small" href="/checkout">
+            <a class="button-small" asp-controller="cart" asp-action="checkout">
                 <span>
                     Thanh toán <i class="fa fa-chevron-right"></i>
                 </span>

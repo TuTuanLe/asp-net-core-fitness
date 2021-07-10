@@ -24,6 +24,8 @@ namespace fitness.Models
         public virtual DbSet<SlideShow> SlideShows { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Photos> Photoss { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -62,6 +64,33 @@ namespace fitness.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Photos_Product");
 
+            });
+
+            modelBuilder.Entity<Invoice>(entity =>
+            {
+
+                entity.HasOne(d => d.Account)
+                    .WithMany(p => p.Invoices)
+                    .HasForeignKey(d => d.AccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Invoice_Account");
+
+            });
+
+            modelBuilder.Entity<InvoiceDetail>(entity =>
+            {
+                entity.HasKey(e => new { e.InvoiceId, e.ProductId });
+                entity.HasOne(d => d.Invoice)
+                    .WithMany(p => p.InvoiceDetails)
+                    .HasForeignKey(d => d.InvoiceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_InvoiceDetail_Invoice");
+               
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.InvoiceDetails)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_InvoiceDetail_Product");
             });
         }
     }
