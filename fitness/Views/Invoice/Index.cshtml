@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Admin_layout.cshtml";
+}
+
+@using fitness.Models;
+<div class="card card-custom">
+    <div class="card-header flex-wrap py-5">
+        <div class="card-title">
+            <h3 class="card-label">
+                Product of Category
+                <div class="text-muted pt-2 font-size-sm">custom column</div>
+            </h3>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="kt_datatable_length"><label>Show <select name="kt_datatable_length" aria-controls="kt_datatable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="kt_datatable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="kt_datatable"></label></div></div></div><div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-separate table-head-custom table-checkable dataTable no-footer dtr-inline" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info" style="width: 714px;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 141px;" aria-sort="ascending" aria-label="Agent: activate to sort column descending">NAME INVOICE</th>
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 142px;" aria-label="Company Email: activate to sort column ascending">CREATED</th>
+
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 96px;" aria-label="Company Name: activate to sort column ascending">PAYMENT</th>
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 150px;" aria-label="Status: activate to sort column ascending">ID ACCOUNT</th>
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 60px;" aria-label="Type: activate to sort column ascending">DELIVERY</th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px;" aria-label="Actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @foreach (var inv in ViewBag.Invoice)
+                            {
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1 dtr-control" style="">
+                                        <div class="d-flex align-items-center">
+
+                                            <div class="ml-3">
+                                                <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2">@inv.Name</span>
+                                                <a href="#" class="text-muted text-hover-primary">Id = @inv.Id</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style=""><a class="text-dark-50 text-hover-primary" href="mailto:ajouannisson13@issuu.com">@inv.Created</a></td>
+
+
+                                    @if (inv.Shipping == 0)
+                                    {
+                                        <td style=""><span class="label label-lg font-weight-bold label-light-primary label-inline">PAID</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td style=""><span class="label label-lg font-weight-bold label-light-danger label-inline">UNPAID</span></td>
+                                    }
+
+
+
+
+
+
+                                    <td style=""><a class="text-dark-50 text-hover-primary" href=""> @inv.AccountId</a></td>
+                                    @if (inv.Status == 0)
+                                    {
+
+                                        <td style="">
+                                            <span class="label label-lg font-weight-bold label-light-primary label-inline">
+                                                Done
+                                            </span>
+
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td style="">
+                                            <button type="button" class="label label-lg font-weight-bold label-light-danger label-inline" data-toggle="modal" data-target="#exampleModal_@inv.Id">
+                                                pendding
+                                            </button>
+
+                                        </td>
+                                    }
+
+
+                                    <td nowrap="nowrap" style="">
+                                        
+                                       
+                                        <a asp-controller="invoice" asp-action="delete" asp-route-id="@inv.Id" onclick=" return confirm('Are you sure ?')" class="btn btn-sm btn-clean btn-icon" title="Delete">
+                                            <i class="la la-trash"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+
+
+                                <div class="modal fade" id="exampleModal_@inv.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Cập nhập đơn hàng</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <i aria-hidden="true" class="ki ki-close"></i>
+                                                </button>
+                                            </div>
+                                            <form asp-action="update" asp-controller="Invoice" method="post">
+                                                <div class="modal-body">
+                                                    <label> (Giao hàng thành công :v)</label>
+                                                    <input type="text" name="Id_Invoice" id="Id_Invoice" value="@inv.Id" hidden />
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary font-weight-bold">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite">
+                        Showing 1 to 10 of 50 entries
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="kt_datatable_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button page-item previous disabled" id="kt_datatable_previous">
+                                <a href="#" aria-controls="kt_datatable" data-dt-idx="0" tabindex="0" class="page-link">
+                                    <i class="ki ki-arrow-back"></i>
+                                </a>
+                            </li>
+                            <li class="paginate_button page-item active">
+                                <a aria-controls="kt_datatable" data-idx="1" tabindex="0" class="page-link">1</a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a  aria-controls="kt_datatable" data-idx="2" tabindex="0" class="page-link">2</a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a aria-controls="kt_datatable" data-idx="3" tabindex="0" class="page-link">3</a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a aria-controls="kt_datatable" data-idx="4" tabindex="0" class="page-link">4</a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a aria-controls="kt_datatable" data-idx="5" tabindex="0" class="page-link">5</a>
+                            </li>
+                            <li class="paginate_button page-item next" id="kt_datatable_next">
+                                <a href="#" aria-controls="kt_datatable" data-dt-idx="6" tabindex="0" class="page-link"><i class="ki ki-arrow-next"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

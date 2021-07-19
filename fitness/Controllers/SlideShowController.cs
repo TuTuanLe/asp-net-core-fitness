@@ -13,9 +13,10 @@ namespace fitness.Controllers
     public class SlideShowController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
-     
+        [Obsolete]
         private IHostingEnvironment ihostingEnviroment;
 
+        [Obsolete]
         public SlideShowController(DatabaseContext _db, IHostingEnvironment hostingEnvironment)
         {
             this.db = _db;
@@ -36,6 +37,7 @@ namespace fitness.Controllers
         }
 
         [HttpPost]
+        [Obsolete]
         public IActionResult Add(SlideShow slideshow, IFormFile photo)
         {
             var path = Path.Combine(this.ihostingEnviroment.WebRootPath, "SlideShows", photo.FileName);

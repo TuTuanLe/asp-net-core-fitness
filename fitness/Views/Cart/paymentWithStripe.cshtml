@@ -1,0 +1,167 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<fitness.Stripe.StripeSettings> Stripe
+
+@{
+    Layout = null;
+}
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="shortcut icon" href="//theme.hstatic.net/1000185761/1000461179/14/favicon.png?v=1834" type="image/png">
+    <title>
+        iFitness.vn - Thanh toán đơn hàng
+    </title>
+
+
+    <meta name="description" content="iFitness.vn - Thanh toán đơn hàng">
+
+    <link href="//hstatic.net/0/0/global/checkouts.css?v=1.1" rel="stylesheet" type="text/css" media="all">
+    <link href="//theme.hstatic.net/1000185761/1000461179/14/check_out.css?v=1834" rel="stylesheet" type="text/css" media="all">
+    <script type="text/javascript" async="" src="https://www.googleadservices.com/pagead/conversion_async.js"></script>
+    <script src="https://connect.facebook.net/signals/config/1920784834847027?v=2.9.43&amp;r=stable" async=""></script>
+    <script src="https://connect.facebook.net/signals/plugins/identity.js?v=2.9.43" async=""></script>
+    <script async="" src="//connect.facebook.net/en_US/fbevents.js"></script>
+    <script async="" src="//www.google-analytics.com/analytics.js"></script>
+    <script type="text/javascript" async="" src="https://stats.hstatic.net/analytics.min.js?t=2"></script>
+    <script src="//hstatic.net/0/0/global/jquery.min.js" type="text/javascript"></script>
+
+    <script src="//hstatic.net/0/0/global/jquery.validate.js" type="text/javascript"></script>
+
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no">
+
+</head>
+<body style="" data-new-gr-c-s-check-loaded="14.1020.0" data-gr-ext-installed="">
+
+
+    <div class="banner">
+        <div class="wrap">
+            <a href="/" class="logo">
+                <h1 class="logo-text">KtxA.Uit.iFitness</h1>
+            </a>
+        </div>
+    </div>
+
+    <div class="content content-second">
+        <div class="wrap">
+            <div class="sidebar sidebar-second">
+                <div class="sidebar-content">
+                    <div class="order-summary">
+                        <div class="order-summary-sections">
+
+
+                            <div class="order-summary-section order-summary-section-discount" data-order-summary-section="discount">
+                                <form id="form_discount_add" accept-charset="UTF-8" method="post">
+                                    <input name="utf8" type="hidden" value="✓">
+                                    <div class="fieldset">
+                                        <div class="field  ">
+                                            <div class="field-input-btn-wrapper">
+                                                <div class="field-input-wrapper">
+                                                    <label class="field-label" for="discount.code">Mã giảm giá</label>
+                                                    <input placeholder="Mã giảm giá" class="field-input" data-discount-field="true" autocomplete="off" autocapitalize="off" spellcheck="false" size="30" type="text" id="discount.code" name="discount.code" value="">
+                                                </div>
+                                                <button type="submit" class="field-input-btn btn btn-default btn-disabled">
+                                                    <span class="btn-content">Sử dụng</span>
+                                                    <i class="btn-spinner icon icon-button-spinner"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+
+        <div class="wrap">
+            <div class="sidebar" style="height: 1000px;">
+                <div class="sidebar-content">
+                    <div class="order-summary order-summary-is-collapsed">
+                        <h2 class="visually-hidden">Thông tin đơn hàng</h2>
+                        <div class="order-summary-sections">
+                            
+
+                         
+
+                            
+                            <div id="note_new"><a>lấy mã ưu đãi dành cho thành viên vip ngay</a></div><div class="note_checkout"><strong>BẠN LÀ KHÁCH HÀNG MỚI? Hãy TẠO TÀI KHOẢN tại iFitness để: </strong><p></p><p>+ Tích điểm và nhận được Ưu Đãi Dành Riêng Cho Khách Hàng Thân Thiết.</p> <p>+ Đặt Hàng Nhanh Hơn Gấp 3 lần vào lần mua sắm tiếp theo.</p><p>+ Lưu trữ nhiều địa chỉ vận chuyển, xem và kiểm tra đơn hàng dễ dàng hơn.</p><p>Còn chần chờ gì nữa mà không <a href="" target="_blank"><strong style="color:#ff0a00">ĐĂNG KÝ NGAY</strong></a></p><div style="text-align:center"><a href="" target="_blank"><strong style="color:#ff0a00">Xem chi tiết ưu đãi</strong></a></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main">
+                <div class="main-header">
+                    <a href="/" class="logo">
+                        <h1 class="logo-text">KtxA.Uit.Fitness.com</h1>
+                    </a>
+
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="cart" asp-action="index">Giỏ hàng của bạn</a>
+                        </li>
+
+                        <li class="breadcrumb-item breadcrumb-item-current">
+
+                            Thông tin giao hàng
+
+                        </li>
+                        <li class="breadcrumb-item ">
+
+                            Phương thức thanh toán
+
+                        </li>
+
+                    </ul>
+
+                </div>
+             
+                <div class="main-footer footer-powered-by">
+
+
+                    <div class="container" style="align-items:center; justify-content:center">
+
+                        <form asp-action="Process_Stripe" asp-controller="cart" mothod="post">
+                            <script src="//checkout.stripe.com/v2/checkout.js"
+                                    class="stripe-button"
+                                    data-key="pk_test_51I2XZDCd2vCgvE5dt7tee4LpJB3CjRsfe3pdqF2urTZ4muIztP87H0fBJZUXWtPn94055jbhU1dO8kmQg6IoWr2o00fvF39zgg"
+                                    data-locale="auto"
+                                    data-description="THANH TOÁN QUA STRIPE"
+                                   >
+
+                            </script>
+                        </form>
+
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>

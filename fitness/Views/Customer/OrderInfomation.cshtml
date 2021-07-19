@@ -36,9 +36,10 @@
                     <thead>
                         <tr>
 
-                            <th width="45%" class="item">Name</th>
-                            <th width="30%" class="qty">Created</th>
-                            <th width="30%" class="single_price">Status</th>
+                            <th width="25%" class="item">Name</th>
+                            <th width="20%" class="qty">Pay</th>
+                            <th width="20%" class="qty">Created</th>
+                            <th width="20%" class="single_price">Status</th>
                             <th width="15%" class="price">action</th>
                         </tr>
                     </thead>
@@ -49,22 +50,34 @@
                         @foreach (var item in ViewBag.invoice)
                         {
 
-                            <tr class="list-carts" id="cart_detail_@item.Id">
+                        <tr class="list-carts" id="cart_detail_@item.Id">
 
-                                <td class="item">
-                                    @item.Name
-                                </td>
+                            <td class="item">
+                                @item.Name
+                            </td>
+                            <td class="qty" style="align-items:center">
+                                @if (item.Shipping == 1)
+                                {
+                                <i class="fa  fa-check-square" style="color:red"> &nbsp;UNPAID</i>
+                                }
+                                else
+                                {
+                            <i class="fa  fa-check-square" style="color:green">&nbsp;&nbsp;&nbsp; PAID</i>
+                                }
+                             
 
-                                <td class="qty">
-                                    @item.Created.ToString("MM/dd/yyyy")
-                                </td>
-                                <td class="single_price">
-                                    @(item.Status == 1 ? "Pending": "Done" )
-                                </td>
-                                <td class="price">
-                                    <a class="detail_invoice" data-id="@item.Id">detail </a>
-                                </td>
-                            </tr>
+                            </td>
+
+                            <td class="qty">
+                                @item.Created.ToString("MM/dd/yyyy")
+                            </td>
+                            <td class="single_price">
+                                @(item.Status == 1 ? "Pending": "Done" )
+                            </td>
+                            <td class="price">
+                                <a class="detail_invoice" data-id="@item.Id">detail </a>
+                            </td>
+                        </tr>
 
                         }
                     </tbody>
@@ -85,7 +98,7 @@
             data: { id: id_invoice },
             success: function (data) {
                 var str = '<tr class="list-carts" id="remove_table_' + id_invoice + '" >';
-                str += ' <td colspan="4" width="100%"> ';
+                str += ' <td colspan="5" width="100%"> ';
                 str += '<table id="remove_table_' + id_invoice + '" >                                                          ';
                 str += '    <thead>                                                      ';
                 str += '        <tr>                                                     ';
@@ -113,20 +126,11 @@
                     str += '        <a style="color:#3a3a3c;" href="">                                    ';
                     str += '            ' + item.name + '                                                                                                                             ';
                     str += '        </a>                                                                                                                                      ';
-                    str += '        <span class="variant_title">90 Viên</span>                                                                                                ';
-                    str += '        <a class="cart hidden-xs click-delete-cart" data-id="item.Id">                                                                            ';
-                    str += '            <i class="fa fa-trash fa-lg"></i> Bỏ sản phẩm                                                                                         ';
-                    str += '        </a>                                                                                                                                      ';
                     str += '    </td>                                                                                                                                         ';
                     str += '                                                                                                                                                  ';
                     str += '    <td class="qty">                                                                                                                              ';
                     str += '        <label class="visible-xs">Số lượng: </label>                                                                                              ';
-                    str += '        <select>                                                                                                                                  ';
-                    str += '                                                                                                                                                  ';
-                    str += '            <option value="item.Quantity" selected="">' + item.quantity + '</option>                                                                      ';
-                    str += '                                                                                                                                                  ';
-                    str += '                                                                                                                                                  ';
-                    str += '        </select>                                                                                                                                 ';
+                    str += '             ' + item.quantity+'                                                                       ';
                     str += '        <a class="visible-xs cart click-delete">                                                                                                  ';
                     str += '            <i class="fa fa-trash fa-lg"></i> Xóa                                                                                                 ';
                     str += '        </a>                                                                                                                                      ';

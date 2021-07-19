@@ -1,4 +1,5 @@
 using fitness.Models;
+using fitness.Stripe;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,13 +54,17 @@ namespace fitness
             services.AddOptions();
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connection));
-
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
+        [Obsolete]
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            StripeConfiguration.SetApiKey("sk_test_51I2XZDCd2vCgvE5dbMbLhJYkVRgCIIvAojWBlNUFy6FQqVIsm7FI87LuINxnPZ74bAgn5kh8VHfoMxx6jKyIhN0100CiDHdf3M");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -66,7 +72,6 @@ namespace fitness
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             //app.UseAuthorization();

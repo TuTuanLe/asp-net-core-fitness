@@ -20,7 +20,7 @@ namespace fitness.Models
         public DateTime Created { get; set; }
         public int Status { get; set; }
         public int AccountId { get; set; }
-
+        public int Shipping { get; set; }
         public virtual Account Account { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
     }

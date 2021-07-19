@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -36,19 +38,43 @@ namespace fitness.Controllers
         [HttpPost]
         public IActionResult Register(Account account)
         {
-            account.password = BCrypt.Net.BCrypt.HashPassword(account.password);
-            account.status = true;
-            db.Accounts.Add(account);
-            db.SaveChanges();
+            //account.password = BCrypt.Net.BCrypt.HashPassword(account.password);
+            //account.status = true;
+            //db.Accounts.Add(account);
+            //db.SaveChanges();
 
-            var roleAccount = new RoleAccount()
+            //var roleAccount = new RoleAccount()
+            //{
+            //    RoleId = 2,
+            //    AccountId = account.id,
+            //    Status = true
+            //};
+            //db.AccountRoles.Add(roleAccount);
+            //db.SaveChanges();
+
+            
+
+            using (MailMessage mail = new MailMessage())
             {
-                RoleId = 2,
-                AccountId = account.id,
-                Status = true
-            };
-            db.AccountRoles.Add(roleAccount);
-            db.SaveChanges();
+                mail.From = new MailAddress("webfiness.ktxa.uit@gmail.com");
+                mail.To.Add(account.email);
+                mail.Subject = "Hello World";
+                mail.Body = "<h1>Hello</h1>";
+
+              
+
+                                                                                                                                                                                                                                                                                                                                        
+
+                mail.IsBodyHtml = true;
+
+
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential("webfiness.ktxa.uit@gmail.com", "rongthieng123");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                }
+            }
             return RedirectToAction("login", "customer");
         }
 

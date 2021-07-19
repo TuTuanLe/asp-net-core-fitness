@@ -652,7 +652,7 @@
                                             <div class="radio-wrapper content-box-row">
                                                 <label class="radio-label">
                                                     <div class="radio-input">
-                                                        <input id="payment_method_id_COD" class="input-radio" name="payment_method_id" type="radio" value="false" checked="">
+                                                        <input id="payment_method_id_COD" class="input-radio" name="payment_method_id" type="radio" value="COD" checked="">
                                                     </div>
                                                     <span class="radio-label-primary">Thanh toán khi giao hàng (COD)</span>
                                                 </label>
@@ -668,9 +668,20 @@
                                             <div class="radio-wrapper content-box-row">
                                                 <label class="radio-label">
                                                     <div class="radio-input">
-                                                        <input id="payment_method_id_momo" class="input-radio" name="payment_method_id" type="radio" value="true">
+                                                        <input id="payment_method_id_momo" class="input-radio" name="payment_method_id" type="radio" value="momo">
                                                     </div>
                                                     <span class="radio-label-primary">Thanh toán online qua ví MoMo</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="radio-wrapper content-box-row">
+                                                <label class="radio-label">
+                                                    <div class="radio-input">
+                                                        <input id="payment_method_id_stripe" class="input-radio" name="payment_method_id" type="radio" value="stripe">
+                                                    </div>
+                                                    <span class="radio-label-primary">
+                                                        Thanh toán online qua Stripe
+                                                    </span>
                                                 </label>
                                             </div>
 
@@ -730,8 +741,10 @@
     $(document).on('click', '#payment_method_id_momo', function () {
         $("#payment_method_id_COD_show").addClass("hidden");
     });
-
     
+    $(document).on('click', '#payment_method_id_stripe', function () {
+        $("#payment_method_id_COD_show").addClass("hidden");
+    });
 
 </script>
 

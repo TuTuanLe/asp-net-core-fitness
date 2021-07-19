@@ -14,8 +14,11 @@ namespace fitness.Controllers
 {
     public class ProductController : Controller
     {
+        [Obsolete]
         private IHostingEnvironment ihostingEnviroment;
         private DatabaseContext db = new DatabaseContext();
+
+        [Obsolete]
         public ProductController(DatabaseContext _db, IHostingEnvironment hostingEnvironment)
         {
             this.db = _db;
@@ -39,6 +42,7 @@ namespace fitness.Controllers
         }
 
         [HttpPost]
+        [Obsolete]
         public IActionResult Add(ProductViewModel productViewModel, IFormFile photo)
         {
             string PathImgPlace = DateTime.Now.ToString("MMddyyyyhhmmss");
